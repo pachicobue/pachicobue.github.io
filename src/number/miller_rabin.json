@@ -1,0 +1,9 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"../utility/modint.hpp\"\n#include \"../utility/modint64.hpp\"\ntemplate<typename mint>\nbool millerRabin(u64 n, const Vec<u64>& as)\n{\n    auto d = n - 1;\n    for (; (d & 1) == 0; d >>= 1) {}\n    for (const u64 a : as) {\n        if (n <= a) { break; }\n        auto s = d;\n        mint x = mint(a).pow(s);\n        while (x.val() != 1 and x.val() != n - 1 and s != n - 1) { x *= x, s <<= 1; }\n        if (x.val() != n - 1 and s % 2 == 0) { return false; }\n    }\n    return true;\n}\ninline bool isPrime(u64 n)\n{\n    using mint = modint_dynamic<873293817>;\n    using mint64 = modint64_dynamic<828271328>;\n    if (n == 1) { return false; }\n    if ((n & 1) == 0) { return n == 2; }\n    if (n < (1ULL << 30)) {\n        mint::setMod(n);\n        return millerRabin<mint>(n, {2, 7, 61});\n    } else {\n        mint64::setMod(n);\n        return millerRabin<mint64>(n, {2, 325, 9375, 28178, 450775, 9780504});\n    }\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/number/mod_nthroot.yuki.test.cpp",
+        "verifications/number/prime_factors.test.cpp",
+        "verifications/number/mod_nthroot.test.cpp"
+    ]
+}

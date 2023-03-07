@@ -1,0 +1,8 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"../number/eratosthenes_sieve.hpp\"\ntemplate<typename T>\nVec<T> divisorsZeta(const Vec<T>& xs, bool subset)\n{\n    const int N = (int)xs.size();\n    auto ys = xs;\n    for (const int p : EratosthenesSieve{N}.primes()) {\n        if (subset) {\n            for (int i = 1; i * p < N; i++) { ys[i * p] += ys[i]; }\n        } else {\n            for (int i = (N - 1) / p; i >= 1; i--) { ys[i] += ys[i * p]; }\n        }\n    }\n    return ys;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/formal_dirichlet_series/gcd_convolution.test.cpp",
+        "verifications/formal_dirichlet_series/lcm_convolution.test.cpp"
+    ]
+}

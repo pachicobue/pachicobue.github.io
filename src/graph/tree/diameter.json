@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../../common.hpp\"\n#include \"../graph.hpp\"\nnamespace diameter_impl {\ntemplate<typename T>\nstruct Edge\n{\n    Edge(int i, int f, int t, T c) : id{i}, from{f}, to{t}, cost{c} {}\n    Edge(const Edge&) = default;\n    int id;\n    int from, to;\n    T cost;\n};\n};  // namespace diameter_impl\ntemplate<typename T>\nVec<diameter_impl::Edge<T>> diameter(const Graph<T>& g)\n{\n    auto ds = g.depths(0);\n    auto ps = g.parents(0);\n    const int s = maxInd(ds);\n    ds = g.depths(s);\n    ps = g.parents(s);\n    const int t = maxInd(ds);\n    Vec<diameter_impl::Edge<T>> es;\n    for (int u = t; ps[u] != -1; u = ps[u]) {\n        for (const auto& [id, v, c] : g[u]) {\n            if (v == ps[u]) { es.emplace_back(id, u, v, c); }\n        }\n    }\n    return es;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/graph/tree/diameter.test.cpp"
+    ]
+}

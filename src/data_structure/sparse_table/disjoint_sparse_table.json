@@ -1,0 +1,10 @@
+{
+    "code": "#pragma once\n#include \"../../common.hpp\"\ntemplate<typename SemiGroup>\nclass DisjointSparseTable\n{\n    using T = typename SemiGroup::T;\n\npublic:\n    DisjointSparseTable(const Vec<T>& vs)\n        : m_size(vs.size()), m_depth(bitWidth(m_size)), m_vss(m_depth, vs)\n    {\n        for (int d : rep(m_depth)) {\n            const int w = 1 << (m_depth - d - 1);\n            for (int i = 1; i * w < m_size; i += 2) {\n                int l = i * w - 1, r = i * w;\n                for (int j : irange(1, w)) {\n                    m_vss[d][l - j] = merge(vs[l - j], m_vss[d][l - j + 1]);\n                    if (r + j < m_size) { m_vss[d][r + j] = merge(vs[r + j], m_vss[d][r + j - 1]); }\n                }\n            }\n        }\n    }\n    T fold(int l, int r) const\n    {\n        assert(0 <= l and l < r and r <= m_size);\n        if (r - l == 1) { return m_vss.back()[l]; }\n        const int d = m_depth - bitWidth(l ^ (r - 1));\n        return merge(m_vss[d][l], m_vss[d][r - 1]);\n    }\n\nprivate:\n    int m_size, m_depth;\n    Vec<Vec<T>> m_vss;\n    static inline SemiGroup merge;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/data_structure/sparse_table/disjoint_sparse_table.rmq.test.cpp",
+        "verifications/data_structure/sparse_table/static_rmq.rmq.test.cpp",
+        "verifications/data_structure/sparse_table/static_rmq.rMq.test.cpp",
+        "verifications/graph/tree/least_common_ancestor.test.cpp"
+    ]
+}

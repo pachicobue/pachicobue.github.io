@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/enumerate_palindromes\n#include \"string/manacher.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    auto S = in.val<Str>();\n    const int N = S.size();\n    Str T;\n    for (int i : rep(N)) {\n        T.push_back('$');\n        T.push_back(S[i]);\n    }\n    T.push_back('$');\n    auto rs = manacher(T);\n    Vec<int> ans;\n    for (int i : irange(1, 2 * N)) { ans.push_back(rs[i] - 1); }\n    out.ln(ans);\n    return 0;\n}\n",
+    "result": "AC"
+}

@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/zalgorithm\n#include \"string/z_algorithm.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    auto S = in.val<Str>();\n    out.ln(z_algorithm(S));\n    return 0;\n}\n",
+    "result": "AC"
+}

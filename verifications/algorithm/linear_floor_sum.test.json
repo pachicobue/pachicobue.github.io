@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_floor_of_linear\n#include \"algorithm/linear_floor_sum.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto T = in.val<int>();\n    LOOP (T) {\n        const auto [N, M, A, B] = in.tup<i64, i64, i64, i64>();\n        out.ln(linearFloorSum(N, A, B, M));\n    }\n    return 0;\n}\n",
+    "result": "AC"
+}

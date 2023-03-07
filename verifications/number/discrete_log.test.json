@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/discrete_logarithm_mod\n#include \"number/discrete_log.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n#include \"utility/modint.hpp\"\n\nint main()\n{\n    const auto T = in.val<int>();\n    using mint = modint_dynamic<0>;\n    LOOP (T) {\n        const auto [x, y, M] = in.tup<u32, u32, u32>();\n        mint::setMod(M);\n        const mint X = x, Y = y;\n        const i64 K = discreteLog(X, Y);\n        out.ln(K);\n    }\n    return 0;\n}\n",
+    "result": "AC"
+}

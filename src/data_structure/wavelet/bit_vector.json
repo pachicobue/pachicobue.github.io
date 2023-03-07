@@ -1,0 +1,8 @@
+{
+    "code": "#pragma once\n#include \"../../common.hpp\"\nclass BitVector\n{\n    static constexpr int B = 64;\n    static int rank(u64 v, int i)\n    {\n        if (i == 0) { return 0; }\n        return popCount(v << (B - i));\n    }\n    struct Block\n    {\n        u64 bits = 0;\n        int rank = 0;  // \u30d6\u30ed\u30c3\u30af\u5148\u982d\u307e\u3067\u306b1\u304c\u4f55\u500b\u3042\u308b\u304b\n    };\n\npublic:\n    BitVector(int n) : m_size{n}, m_bn{n / B + 1}, m_blocks(m_bn) {}\n    void set(int i)\n    {\n        assert(0 <= i and i < m_size);\n        m_blocks[i / B].bits |= (1_u64 << (i % B));\n        m_calced = false;\n    }\n    int rank0(int i) { return i - rank1(i); }\n    int rank1(int i)\n    {\n        assert(0 <= i and i <= m_size);\n        calc();\n        return m_blocks[i / B].rank + rank(m_blocks[i / B].bits, i % B);\n    }\n    int zero()\n    {\n        calc();\n        return m_zero;\n    }\n    int one() { return m_size - zero(); }\n\nprivate:\n    void calc()\n    {\n        if (not m_calced) {\n            m_zero = m_size;\n            for (int i : irange(1, m_bn)) {\n                const int p = popCount(m_blocks[i - 1].bits);\n                m_blocks[i].rank += m_blocks[i - 1].rank + p;\n                m_zero -= p;\n            }\n            m_zero -= popCount(m_blocks[m_bn - 1].bits);\n            m_calced = true;\n        }\n    }\n    int m_size;\n    int m_bn;\n    Vec<Block> m_blocks;\n    bool m_calced = false;\n    int m_zero = 0;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/data_structure/wavelet/wavelet_matrix.rangefreq.test.cpp",
+        "verifications/data_structure/wavelet/wavelet_matrix.quantile.test.cpp"
+    ]
+}

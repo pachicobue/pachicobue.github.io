@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_add_range_sum\n#include \"data_structure/fenwick_tree/fenwick_tree.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<u64>(N);\n    auto fenwick = FenwickTree(as);\n    LOOP (Q) {\n        const auto t = in.val<int>();\n        if (t == 0) {\n            const auto [p, x] = in.tup<int, u64>();\n            fenwick.add(p, x);\n        } else {\n            const auto [l, r] = in.tup<int, int>();\n            out.ln(fenwick.sum(l, r));\n        }\n    }\n    return 0;\n}\n",
+    "result": "AC"
+}

@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"prime_power_sum.hpp\"\ntemplate<typename T, typename F, u32 MAXD = 2>\nclass MultiplicativePrefixSum : public PrimePowerSum<T, MAXD>\n{\n    using PrimePowerSum<T>::id;\n    using PrimePowerSum<T>::m_ps;\n    using PrimePowerSum<T>::m_ns;\n    using PrimePowerSum<T>::m_hss;\n\npublic:\n    MultiplicativePrefixSum(u64 N, F f, const Arr<T, MAXD + 1>& coeffs)\n        : PrimePowerSum<T>{N}, m_buf(m_ns.size(), 0), m_f{f}\n    {\n        for (u32 i : rep(m_buf.size())) {\n            for (u32 d : rep(MAXD + 1)) { m_buf[i] += coeffs[d] * m_hss[d][i]; }\n        }\n    }\n    T get(u64 n) const\n    {\n        T ans = m_buf[id(n)] + 1;\n        for (u32 i : rep(m_ps.size())) { ans += dfs(i, 1, m_ps[i], n / m_ps[i], 1); }\n        return ans;\n    }\n\nprivate:\n    T dfs(u32 i, u32 c, u64 v, u64 lim, T fv) const\n    {\n        T ans = fv * m_f(m_ps[i] * v, m_ps[i], c + 1);\n        if (lim >= m_ps[i] * m_ps[i]) { ans += dfs(i, c + 1, m_ps[i] * v, lim / m_ps[i], fv); }\n        fv *= m_f(v, m_ps[i], c);\n        ans += fv * (m_buf[id(lim)] - m_buf[id(m_ps[i])]);\n        for (u32 j = i + 1; j < m_ps.size() and m_ps[j] * m_ps[j] <= lim; j++) {\n            ans += dfs(j, 1, m_ps[j], lim / m_ps[j], fv);\n        }\n        return ans;\n    }\n    Vec<T> m_buf;\n    F m_f;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/number/multiplicative_prefix_sum.totient.test.cpp"
+    ]
+}

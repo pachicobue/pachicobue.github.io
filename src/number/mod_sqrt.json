@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename mint>\nmint modsqrt(const mint& A)\n{\n    const u64 P = mint::mod();\n    if (A == 0) { return 0; }\n    if (P == 2) { return 1; }\n    const u64 h = (P - 1) >> 1;\n    if (A.pow(h).val() != 1) { return 0; }\n    u64 q = P - 1, Q = 0;\n    while ((q & 1) == 0) { q >>= 1, Q++; }\n    mint Eraser = 1;\n    for (mint Z = 2;; Z += 1) {\n        if (Z.pow(h) != 1) {\n            Eraser = Z.pow(q);\n            break;\n        }\n    }\n    mint Error = A.pow(q), X = A.pow((q + 1) / 2);\n    while (Error.val() != 1) {\n        u64 l = 0;\n        mint pError = Error;\n        for (u64 i = 0; i < Q; i++, pError *= pError) {\n            if (pError.val() == 1) {\n                l = Q - i;\n                break;\n            }\n        }\n        mint pEraser = Eraser;\n        for (u64 i = 0; i < l - 1; i++, pEraser *= pEraser) {}\n        X *= pEraser, Error *= (pEraser * pEraser);\n    }\n    return X;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/number/mod_sqrt.test.cpp"
+    ]
+}

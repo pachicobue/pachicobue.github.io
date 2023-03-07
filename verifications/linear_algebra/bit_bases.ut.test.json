@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: UNITTEST\n#include \"linear_algebra/bit_bases.hpp\"\n\nvoid Test()\n{\n    constexpr int D = 3;\n    Vec<BSet<D>> vs{3, 1, 2, 5};\n    BitBases<D> bases;\n    for (const auto& v : vs) { bases.add(v); }\n    assert(bases.rank() == 3);  //011,101,001\n    const auto origBases = bases.origBases();\n    assert(origBases == (Vec<BSet<D>>{3, 1, 5}));\n    assert(bases.decomp(2).first);\n    assert(bases.decomp(2).second == 3);\n}\n\nint main()\n{\n    Test();\n    return 0;\n}\n",
+    "result": "AC"
+}

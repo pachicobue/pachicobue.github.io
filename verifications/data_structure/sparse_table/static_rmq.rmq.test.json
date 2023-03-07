@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq\n#include \"data_structure/sparse_table/static_rmq.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<u32>(N);\n    struct Ord\n    {\n        using T = u32;\n        bool operator()(const T& x1, const T& x2) const { return x1 < x2; }\n    };\n    const auto rmq = StaticRMQ<Ord>(as);\n    LOOP (Q) {\n        const auto [l, r] = in.tup<int, int>();\n        out.ln(rmq.fold(l, r));\n    }\n}\n",
+    "result": "AC"
+}

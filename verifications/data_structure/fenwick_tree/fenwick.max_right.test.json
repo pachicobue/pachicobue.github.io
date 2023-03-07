@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: UNITTEST\n#include \"data_structure/fenwick_tree/fenwick_tree.hpp\"\n\nvoid Test()\n{\n    FenwickTree<int> fenwick({1, 2, 3, 4, 5, 6, 7});\n    assert(fenwick.maxRight([](int s) { return s <= 0; }) == 0);\n    assert(fenwick.maxRight([](int s) { return s <= 1; }) == 1);\n    assert(fenwick.maxRight([](int s) { return s <= 3; }) == 2);\n    assert(fenwick.maxRight([](int s) { return s <= 21; }) == 6);\n    assert(fenwick.maxRight([](int s) { return s <= 30; }) == 7);\n    std::cerr << fenwick << std::endl;\n}\n\nint main()\n{\n    Test();\n    return 0;\n}\n",
+    "result": "AC"
+}

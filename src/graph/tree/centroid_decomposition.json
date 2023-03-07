@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../../common.hpp\"\n#include \"../graph.hpp\"\ntemplate<typename T>\nclass CentroidDecomposition\n{\npublic:\n    CentroidDecomposition(const Graph<T>& g) : m_cs(g.v())\n    {\n        const int N = g.v();\n        Vec<int> szs(N, 1);\n        Vec<bool> used(N, false);\n        auto sizeDfs = Fix([&](auto dfs, int u, int p) -> int {\n            szs[u] = 1;\n            for (int v : g[u]) {\n                if (v == p or used[v]) { continue; }\n                szs[u] += dfs(v, u);\n            }\n            return szs[u];\n        });\n        auto getCentor = Fix([&](auto dfs, int u, int p, int tot) -> int {\n            for (int v : g[u]) {\n                if (v == p or used[v]) { continue; }\n                if (szs[v] * 2 > tot) { return dfs(v, u, tot); }\n            }\n            if (tot == N) { m_center = u; }\n            return u;\n        });\n        Fix([&](auto dfs, int u, int pc) -> void {\n            const int tot = sizeDfs(u, -1);\n            const int c = getCentor(u, -1, tot);\n            used[c] = true;\n            if (pc != -1) { m_cs.addEdge(pc, c); }\n            for (int v : g[c]) {\n                if (not used[v]) { dfs(v, c); }\n            }\n        })(0, -1);\n    }\n    int center() const { return m_center; }\n    const Graph<>& centers() const { return m_cs; }\n\nprivate:\n    int m_center;\n    Graph<> m_cs;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/graph/tree/centroid_decomposition.test.cpp"
+    ]
+}

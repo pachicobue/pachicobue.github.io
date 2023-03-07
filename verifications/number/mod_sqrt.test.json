@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/sqrt_mod\n#include \"number/mod_sqrt.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nusing mint = modint_dynamic<0>;\nint main()\n{\n    const int T = in.val<int>();\n    LOOP (T) {\n        const auto [Y, P] = in.tup<uint, uint>();\n        mint::setMod(P);\n        const mint ans = modsqrt(mint{Y});\n        if (ans * ans == Y) {\n            out.ln(ans.val());\n        } else {\n            out.ln(-1);\n        }\n    }\n    return 0;\n}\n",
+    "result": "AC"
+}

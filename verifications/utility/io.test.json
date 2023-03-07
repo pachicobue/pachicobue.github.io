@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/many_aplusb\n#include \"common.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto T = in.val<int>();\n    LOOP (T) {\n        const auto [A, B] = in.tup<i64, i64>();\n        out.ln(A + B);\n    }\n\n    return 0;\n}\n",
+    "result": "AC"
+}

@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: IGNORE\n// verification-helper: PROBLEM https://yukicoder.me/problems/no/981\n#include \"number/mod_nthroot.hpp\"\n#include \"utility/modint64.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nusing mint = modint64_dynamic<0>;\nint main()\n{\n    const int T = in.val<int>();\n    LOOP (T) {\n        const auto [P, K, Y] = in.tup<u64, u64, u64>();\n        if (P == 2) {\n            out.ln(Y == 1 ? 1 : K == 0 ? -1 : 0);\n            continue;\n        }\n        mint::setMod(P);\n        const mint ans = modNthRoot(mint(Y), K);\n        if (ans.pow(K) == Y) {\n            out.ln(ans.val());\n        } else {\n            out.ln(-1);\n        }\n    }\n    return 0;\n}\n",
+    "result": "SKIPPED"
+}

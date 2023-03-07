@@ -1,0 +1,5 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\n\ntemplate<typename mint>\nmint lagrangeExtrapolate(const Vec<mint>& ys, const mint& X)\n{\n    const int N = ys.size();\n    const int x = X.val();\n    if (x < N) { return ys[x]; }\n    Vec<mint> ls(N, 1), rs(N, 1);\n    for (int i : rep(N - 1)) { ls[i + 1] = ls[i] * (X - i); }\n    for (int i : per(N - 1)) { rs[i] = rs[i + 1] * (X - i - 1); }\n    Vec<mint> Fs(N);\n    Vec<mint> Gs(N);\n    for (int i : rep(N)) {\n        Fs[i] = ys[i] * mint::ifact(i) * mint::ifact(N - 1 - i) * ((N - 1 - i) % 2 == 0 ? 1 : -1);\n        Gs[i] = ls[N - 1 - i] * rs[N - 1 - i];\n    }\n    mint ans = 0;\n    for (int i : rep(N)) { ans += Fs[i] * Gs[N - 1 - i]; }\n    return ans;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": []
+}

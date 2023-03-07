@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/exp_of_formal_power_series\n#include \"formal_power_series/formal_power_series.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto N = in.val<int>();\n    FormalPowerSeries<mint> as = in.vec<mint>(N);\n    const auto bs = as.exp(N);\n    std::vector<mint> ans(N);\n    for (int i : rep(N)) { ans[i] = bs.at(i); }\n    out.ln(ans);\n    return 0;\n}\n",
+    "result": "AC"
+}

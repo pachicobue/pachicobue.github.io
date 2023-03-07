@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename V>\nVec<int> z_algorithm(const V& vs)\n{\n    const int N = std::size(vs);\n    Vec<int> ans(N, -1);\n    for (int i = 1, j = 0; i < N;) {\n        while (i + j < N and vs[j] == vs[i + j]) { j++; }\n        ans[i] = j;\n        if (j == 0) {\n            ++i;\n            continue;\n        }\n        int k = 1;\n        while (i + k < N and k + ans[k] < j) {\n            ans[i + k] = ans[k];\n            k++;\n        }\n        i += k, j -= k;\n    }\n    ans[0] = N;\n    return ans;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/string/z_algorithm.test.cpp"
+    ]
+}
