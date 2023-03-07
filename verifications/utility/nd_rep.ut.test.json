@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: UNITTEST\n#include \"utility/nd_rep.hpp\"\n\nvoid Test()\n{\n    std::vector<std::vector<int>> iss;\n    for (auto is : ndRep({2, 3, 4})) {\n        assert(0 <= is[0] and is[0] < 2);\n        assert(0 <= is[1] and is[1] < 3);\n        assert(0 <= is[2] and is[2] < 4);\n        iss.push_back(is);\n    }\n    assert(iss.size() == 2 * 3 * 4);\n    assert(std::is_sorted(iss.begin(), iss.end()));\n}\n\nint main()\n{\n    Test();\n    return 0;\n}\n",
-    "result": "AC"
-}

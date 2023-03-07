@@ -1,8 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename T, u32 MAXD = 2>\nclass PrimePowerSum\n{\npublic:\n    PrimePowerSum(u64 N) : m_N{N}, m_sqrt{(u32)std::sqrt(N)}, m_ns{0}\n    {\n        assert(N >= 2);\n        for (u64 i = N; i > 0; i = N / (N / i + 1)) { m_ns.push_back(i); }\n        for (const auto n : m_ns) {\n            const T x = n;\n            m_hss[0].push_back(x - 1);\n            m_hss[1].push_back(x * (x + 1) / 2 - 1);\n            m_hss[2].push_back(x * (x + 1) * (x * 2 + 1) / 6 - 1);\n        }\n        for (u32 x = 2; x <= m_sqrt; x++) {\n            if (m_hss[0][m_ns.size() - x] == m_hss[0][m_ns.size() - x + 1]) { continue; }\n            m_ps.push_back(x);\n            const u64 y = (u64)x * x;\n            for (u32 i = 1; i < m_ns.size(); i++) {\n                const u64 n = m_ns[i];\n                if (n < y) { break; }\n                const u32 j = (i * x <= m_sqrt ? i * x : m_ns.size() - n / x);\n                const u32 k = m_ns.size() - x + 1;\n                m_hss[0][i] -= (m_hss[0][j] - m_hss[0][k]);\n                m_hss[1][i] -= (m_hss[1][j] - m_hss[1][k]) * x;\n                m_hss[2][i] -= (m_hss[2][j] - m_hss[2][k]) * x * x;\n            }\n        }\n    }\n    T get(u32 d, u64 n) const\n    {\n        const u32 i = id(n);\n        assert(m_ns[i] == n);\n        return m_hss[d][i];\n    }\n\nprotected:\n    u32 id(u64 x) const { return x <= m_sqrt ? m_ns.size() - x : m_N / x; }\n    u64 m_N;\n    u32 m_sqrt;\n    Vec<u64> m_ns, m_ps;\n    Arr<Vec<T>, MAXD + 1> m_hss;\n};\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/number/multiplicative_prefix_sum.totient.test.cpp",
-        "verifications/number/prime_powersum.primecount.test.cpp"
-    ]
-}

@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_kth_smallest\n#include \"data_structure/wavelet/wavelet_matrix.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<u32>(N);\n    auto wm = WaveletMatrix(as);\n    LOOP (Q) {\n        const auto [l, r, k] = in.tup<int, int, int>();\n        out.ln(wm.quantile(l, r, k));\n    }\n    return 0;\n}\n",
-    "result": "AC"
-}

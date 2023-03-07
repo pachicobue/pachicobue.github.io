@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C\n#include \"graph/floyd_warshall.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto [V, E] = in.tup<int, int>();\n    Graph<i64> g(V);\n    LOOP (E) {\n        const auto [u, v, c] = in.tup<int, int, i64>();\n        g.addEdge(u, v, c);\n    }\n    const auto dss = floydWarshall(g);\n    for (int i : rep(V)) {\n        if (dss[i][i] < 0) { return out.ln(\"NEGATIVE CYCLE\"); }\n    }\n    for (int i : rep(V)) {\n        for (int j : rep(V)) {\n            out(j == 0 ? \"\" : \" \");\n            if (dss[i][j] >= INF<i64>) {\n                out(\"INF\");\n            } else {\n                out(dss[i][j]);\n            }\n        }\n        out(\"\\n\");\n    }\n\n    return 0;\n}\n",
-    "result": "AC"
-}

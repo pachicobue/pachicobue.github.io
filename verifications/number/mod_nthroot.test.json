@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/kth_root_mod\n#include \"number/mod_nthroot.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nusing mint = modint_dynamic<0>;\nint main()\n{\n    const int T = in.val<int>();\n    LOOP (T) {\n        const auto [K, Y, P] = in.tup<uint, uint, uint>();\n        if (P == 2) {\n            out.ln(Y == 1 ? 1 : K == 0 ? -1 : 0);\n            continue;\n        }\n        mint::setMod(P);\n        const mint ans = modNthRoot<mint>(mint{Y}, K);\n        if (ans.pow(K) == Y) {\n            out.ln(ans.val());\n        } else {\n            out.ln(-1);\n        }\n    }\n    return 0;\n}\n",
-    "result": "AC"
-}

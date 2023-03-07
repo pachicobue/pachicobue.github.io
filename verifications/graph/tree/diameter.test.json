@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_diameter\n#include \"graph/tree/diameter.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto N = in.val<int>();\n    Graph<i64> g(N);\n    LOOP (N - 1) {\n        const auto [u, v, c] = in.tup<int, int, i64>();\n        g.addEdge(u, v, c, true);\n    }\n    auto es = diameter(g);\n    i64 X = 0;\n    Vec<int> vs{es[0].from};\n    for (const auto& e : es) {\n        X += e.cost;\n        vs.push_back(e.to);\n    }\n    out.ln(X, vs.size());\n    out.ln(vs);\n    return 0;\n}\n",
-    "result": "AC"
-}

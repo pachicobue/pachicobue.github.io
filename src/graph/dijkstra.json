@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename T>\nVec<T> dijkstra(const Graph<T>& g, int s)\n{\n    const int N = g.v();\n    assert(0 <= s and s < N);\n    Vec<T> ds(N, INF<T>);\n    using P = Pair<T, int>;\n    MinHeap<P> Q;\n    ds[s] = 0;\n    Q.push({T{}, s});\n    while (not Q.empty()) {\n        const auto [c, u] = Q.top();\n        Q.pop();\n        if (ds[u] < c) { continue; }\n        for (UNUSED const auto& [_, v, c] : g[u]) {\n            if (ds[v] <= ds[u] + c) { continue; }\n            ds[v] = ds[u] + c;\n            Q.push({ds[v], v});\n        }\n    }\n    return ds;\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/graph/dijkstra.test.cpp"
-    ]
-}

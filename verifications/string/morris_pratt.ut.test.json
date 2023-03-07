@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: UNITTEST\n#include \"string/morris_pratt.hpp\"\n\nvoid Test()\n{\n    Str s = \"aabaabaaa\";\n    const auto rs = morrisPratt(s);\n    assert(rs == (Vec<int>{-1, 0, 1, 0, 1, 2, 3, 4, 5, 2}));\n}\n\nint main()\n{\n    Test();\n    return 0;\n}\n",
-    "result": "AC"
-}

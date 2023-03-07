@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\n\ntemplate<typename T>\nVec<T> berlekampMassey(const Vec<T>& A)\n{\n    const int N = (int)A.size();\n    Vec<T> B{1}, C{1};\n    T b = 1;\n    for (int j : irange(1, N + 1)) {\n        int m = (int)B.size(), l = (int)C.size();\n        T d = 0;\n        for (int i : rep(l)) { d += A[j - l + i] * C[i]; }\n        B.push_back(0), m++;\n        if (d == 0) { continue; }\n        const T c = -d / b;\n        if (l < m) {\n            auto temp = C;\n            C.insert(C.begin(), m - l, 0);\n            for (int i : rep(m)) { C[m - 1 - i] += c * B[m - 1 - i]; }\n            B = temp, b = d;\n        } else {\n            for (int i : rep(m)) { C[l - 1 - i] += c * B[m - 1 - i]; }\n        }\n    }\n    reverseAll(C);\n    return C;\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/formal_power_series/berlekamp_massey.test.cpp"
-    ]
-}

@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/factorize\n#include \"number/prime_factors.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto Q = in.val<int>();\n    LOOP (Q) {\n        const auto a = in.val<u64>();\n        const auto fs = primeFactors(a);\n        std::vector<u64> ans;\n        for (const auto& [p, e] : fs) {\n            LOOP (e) { ans.push_back(p); }\n        }\n        out.ln(ans.size(), ans);\n    }\n    return 0;\n}\n",
-    "result": "AC"
-}

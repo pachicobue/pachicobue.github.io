@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/bitwise_and_convolution\n#include \"set_power_series/or_convolution.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto n = in.val<int>();\n    const int N = 1 << n;\n    const auto as = in.vec<mint>(N);\n    const auto bs = in.vec<mint>(N);\n    Vec<mint> As(N, 0), Bs(N, 0);\n    for (int i : rep(N)) {\n        As[i] = as[N - i - 1];\n        Bs[i] = bs[N - i - 1];\n    }\n    const auto Cs = orConvolute(As, Bs);\n    Vec<int> ans(Cs.size());\n    for (int i : rep(N)) { ans[i] = Cs[N - i - 1].val(); }\n    out.ln(ans);\n    return 0;\n}\n",
-    "result": "AC"
-}

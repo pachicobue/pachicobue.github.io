@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"set_hadamard.hpp\"\ntemplate<typename T>\nVec<T> xorConvolute(Vec<T> f, Vec<T> g)\n{\n    const int N = bitCeil(std::max(f.size(), g.size()));\n    f.resize(N), g.resize(N);\n    auto F = setHadamard(f, false), G = setHadamard(g, false);\n    for (int i : rep(N)) { F[i] *= G[i]; }\n    return setHadamard(F, true);\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/set_power_series/xor_convolution.test.cpp"
-    ]
-}

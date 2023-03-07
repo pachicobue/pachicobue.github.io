@@ -1,8 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"bin_search.hpp\"\n\ninline u64 intNthRoot(u64 a, u64 k)\n{\n    if (a == 0) { return 0; }\n    if (k == 1) { return a; }\n    if (k >= 64) { return 1; }\n    auto satPow = [&](const u128& a, int k) {\n        u128 x = 1;\n        LOOP (k) {\n            x *= a;\n            if (x >= (u128(1) << 64)) { break; }\n        }\n        return x;\n    };\n    return binSearch(1_i64 << 32, 1_i64, [&](i64 x) { return satPow(x, k) <= a; });\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/number/discrete_log.test.cpp",
-        "verifications/utility/int_nthroot.test.cpp"
-    ]
-}

@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/gcd_convolution\n#include \"formal_dirichlet_series/gcd_convolution.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto N = in.val<int>();\n    auto as = Vec<mint>{0};\n    concat(as, in.vec<mint>(N));\n    auto bs = Vec<mint>{0};\n    concat(bs, in.vec<mint>(N));\n    const auto cs = gcdConvolute(as, bs);\n    Vec<int> Cs(N);\n    for (int i : rep(N)) { Cs[i] = cs[i + 1].val(); }\n    out.ln(Cs);\n    return 0;\n}\n",
-    "result": "AC"
-}

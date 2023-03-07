@@ -1,5 +1,0 @@
-{
-    "code": "#pragma once\n#include \"common.hpp\"\n#include \"utility/scanner.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/nd_vec.hpp\"\n#include \"utility/bin_search.hpp\"\n#include \"utility/modint.hpp\"\n#include \"graph/graph.hpp\"\n",
-    "result": "NOT_TESTED",
-    "verified_with": []
-}

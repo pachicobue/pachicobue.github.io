@@ -1,8 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../../common.hpp\"\n#include \"../graph.hpp\"\nclass LevelAncestor\n{\npublic:\n    template<typename T>\n    LevelAncestor(const Graph<T>& g, int r = 0) : m_v(g.v()), m_ds(m_v, 0), m_ps(m_v)\n    {\n        Fix([&](auto dfs, int u, int p) -> void {\n            for (int k = 1; (1 << k) <= m_ds[u]; k++) {\n                m_ps[u].push_back(m_ps[m_ps[u][k - 1]][k - 1]);\n            }\n            for (int v : g[u]) {\n                if (v == p) { continue; }\n                m_ds[v] = m_ds[u] + 1;\n                m_ps[v].push_back(u);\n                dfs(v, u);\n            }\n        })(r, -1);\n    };\n    int lca(int u, int v) const\n    {\n        assert(0 <= u and u < m_v);\n        assert(0 <= v and v < m_v);\n        if (m_ds[u] > m_ds[v]) { std::swap(u, v); }\n        v = (*this)(v, m_ds[v] - m_ds[u]);\n        if (u == v) { return u; }\n        while (true) {\n            if (m_ps[u][0] == m_ps[v][0]) { return m_ps[u][0]; }\n            for (int i = m_ps[u].size() - 1; i >= 0; i--) {\n                const int nu = m_ps[u][i], nv = m_ps[v][i];\n                if (nu != nv) {\n                    u = nu, v = nv;\n                    break;\n                }\n            }\n        }\n    }\n    int operator()(int v, int d) const\n    {\n        assert(0 <= v and v < m_v);\n        for (int k = (int)bitWidth(d); k >= 0; k--) {\n            if (isBitOn(d, k)) { v = m_ps[v][k]; }\n        }\n        return v;\n    }\n\nprivate:\n    int m_v;\n    Vec<int> m_ds;\n    Vec<Vec<int>> m_ps;\n};\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/graph/tree/level_ancestor.ut.test.cpp",
-        "verifications/graph/tree/level_ancestor.lca.test.cpp"
-    ]
-}

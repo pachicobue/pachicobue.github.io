@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: UNITTEST\n#include \"numerical/convolution.hpp\"\n#include \"utility/rng.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto AN = rng.val<int>(1, 1000);\n    const auto BN = rng.val<int>(1, 1000);\n    const auto as = rng.vec<i64>(AN, -100000000, 100000000);\n    const auto bs = rng.vec<i64>(BN, -100000000, 100000000);\n\n    const auto cs = convolute_i64(as, bs);\n    Vec<i64> ds(AN + BN - 1, 0);\n    for (int i : rep(AN)) {\n        for (int j : rep(BN)) { ds[i + j] += (i64)as[i] * bs[j]; }\n    }\n    assert(cs == ds);\n    return 0;\n}\n",
-    "result": "AC"
-}

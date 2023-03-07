@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"formal_power_series.hpp\"\ntemplate<typename mint, typename I>\nmint bostanMori(FormalPowerSeries<mint> f, FormalPowerSeries<mint> g, I N)\n{\n    assert(not g.isZero());\n    const int f_zero = f.lsb(), g_zero = g.lsb();\n    assert(g_zero <= f_zero);\n    if (N < I(f_zero - g_zero)) { return 0; }\n    f <<= f_zero, g <<= g_zero;\n    N -= (f_zero - g_zero);\n    while (N > 0) {\n        f.shrink(N + 1), g.shrink(N + 1);\n        FormalPowerSeries<mint> mg;\n        for (int i : rep(g.size())) { mg[i] = g[i] * (i % 2 == 0 ? 1 : -1); }\n        const auto G = g * mg;\n        const auto F = f * mg;\n        for (int i : rep((F.size() + 1) / 2)) { f[i] = F.at(2 * i + (N % 2)); }\n        for (int i : rep((G.size() + 1) / 2)) { g[i] = G.at(2 * i); }\n        N /= 2;\n    }\n    return f[0] / g[0];\n}\n\ntemplate<typename mint, typename I>\nmint nthTermOfLinearRecurrentSequence(const Vec<mint>& as, I N)\n{\n    const FormalPowerSeries<mint> g{berlekampMassey(as)};\n    const int L = g.size();\n    const auto f = FormalPowerSeries<mint>{as}.mult(g, L - 1);\n    return bostanMori(f, g, N);\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/formal_power_series/bostan_mori.test.cpp"
-    ]
-}
