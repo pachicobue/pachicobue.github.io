@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_kth_smallest\n#include \"data_structure/wavelet/wavelet_matrix.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n#include \"utility/bin_search.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    const auto as = in.vec<i64>(N);\n    auto wm = WaveletMatrix(as);\n    LOOP (Q) {\n        const auto [l, r, k] = in.tup<int, int, int>();\n        const i64 ans = binSearch(TEN<i64>(9) + 1, 0_i64, [&, l = l, r = r, k = k](u32 x) {\n            return wm.rangeFreq(l, r, 0, x) <= k;\n        });\n        out.ln(ans);\n    }\n    return 0;\n}\n",
+    "result": "AC"
+}

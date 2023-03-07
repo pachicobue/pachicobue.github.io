@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename T>\nVec<T> subsetConvolute(const Vec<T>& f, const Vec<T>& g)\n{\n    const int l = topBit(bitCeil(std::max(f.size(), g.size())));\n    const int N = 1 << l;\n    auto F = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));\n    auto G = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));\n    for (int i : rep(f.size())) { F[i][popCount(i)] += f[i]; }\n    for (int i : rep(g.size())) { G[i][popCount(i)] += g[i]; }\n    for (int i = 1; i < N; i <<= 1) {\n        for (int j : rep(N)) {\n            if ((j & i) == 0) {\n                for (int k : rep(l + 1)) {\n                    F[j | i][k] += F[j][k];\n                    G[j | i][k] += G[j][k];\n                }\n            }\n        }\n    }\n    auto H = Vec<Vec<T>>(N, Vec<T>(l + 1, 0));\n    for (int i : rep(N)) {\n        for (int j : rep(l + 1)) {\n            for (int k : rep(l + 1)) {\n                if (j + k > l) { continue; }\n                H[i][j + k] += F[i][j] * G[i][k];\n            }\n        }\n    }\n    for (int i = 1; i < N; i <<= 1) {\n        for (int j : rep(N)) {\n            if ((j & i) == 0) {\n                for (int k : rep(l + 1)) { H[j | i][k] -= H[j][k]; }\n            }\n        }\n    }\n    Vec<T> ans(N);\n    for (int i : rep(N)) { ans[i] = H[i][popCount(i)]; }\n    return ans;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/set_power_series/subset_convolution.test.cpp"
+    ]
+}

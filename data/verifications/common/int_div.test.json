@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: UNITTEST\n#include \"../../src/common/int_div.hpp\"\nvoid fdivTest()\n{\n    auto f = [&](auto x, auto y) {\n        auto a = (decltype(x))std::floor((f80)x / y);\n        assert(floorDiv(x, y) == a);\n    };\n    for (int x = -100; x <= 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y == 0) { continue; }\n            f(x, y);\n        }\n    }\n}\n\nvoid cdivTest()\n{\n    auto c = [&](auto x, auto y) {\n        auto a = (decltype(x))std::ceil((f80)x / y);\n        assert(ceilDiv(x, y) == a);\n    };\n    for (int x = -100; x <= 100; x++) {\n        for (int y = -100; y <= 100; y++) {\n            if (y == 0) { continue; }\n            c(x, y);\n        }\n    }\n}\n\nint main()\n{\n    fdivTest();\n    cdivTest();\n    return 0;\n}\n",
+    "result": "AC"
+}

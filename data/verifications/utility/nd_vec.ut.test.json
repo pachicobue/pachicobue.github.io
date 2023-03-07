@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: UNITTEST\n#include \"utility/nd_vec.hpp\"\n\nvoid Test()\n{\n    using V = std::vector<int>;\n    using VV = std::vector<V>;\n    using VVV = std::vector<VV>;\n    using VVVV = std::vector<VVV>;\n    const auto vss = ndVec<int>({3, 4});\n    assert(vss == VV({{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}));\n    const auto vssss = ndVec({4, 3, 2, 1}, 1);\n    assert(vssss\n           == VVVV({{{{1}, {1}}, {{1}, {1}}, {{1}, {1}}},\n                    {{{1}, {1}}, {{1}, {1}}, {{1}, {1}}},\n                    {{{1}, {1}}, {{1}, {1}}, {{1}, {1}}},\n                    {{{1}, {1}}, {{1}, {1}}, {{1}, {1}}}}));\n}\n\nint main()\n{\n    Test();\n    return 0;\n}\n",
+    "result": "AC"
+}

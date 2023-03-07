@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename T>\nVec<T> bellmanFord(const Graph<T>& g, const int s)\n{\n    const int N = g.v();\n    assert(0 <= s and s < N);\n    Vec<T> ds(N, INF<T>);\n    ds[s] = 0;\n    for (int loop : rep(2 * N)) {\n        for (int u : rep(N)) {\n            if (ds[u] == INF<T>) { continue; }\n            for (const auto& e : g[u]) {\n                const int v = e.to;\n                const auto c = e.cost;\n                if (ds[v] <= ds[u] + c) { continue; }\n                ds[v] = ds[u] + c;\n                if (loop >= N - 1) { ds[v] = -INF<T>; }\n            }\n        }\n    }\n    return ds;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/graph/bellman_ford.test.cpp"
+    ]
+}

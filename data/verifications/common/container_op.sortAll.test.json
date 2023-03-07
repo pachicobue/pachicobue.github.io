@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: UNITTEST\n#include \"common/container_op.hpp\"\n\nvoid PrimitiveArrTest()\n{\n    int vs[5] = {1, 3, 5, 2, 4};\n    sortAll(vs);\n    assert(std::is_sorted(std::begin(vs), std::end(vs)));\n}\nvoid VecTest()\n{\n    Vec<int> vs{1, 3, 5, 2, 4};\n    sortAll(vs);\n    assert(std::is_sorted(std::begin(vs), std::end(vs)));\n}\nvoid ArrTest()\n{\n    Arr<int, 5> vs{1, 3, 5, 2, 4};\n    sortAll(vs);\n    assert(std::is_sorted(std::begin(vs), std::end(vs)));\n}\nvoid DeqTest()\n{\n    Deq<int> vs{1, 3, 5, 2, 4};\n    sortAll(vs);\n    assert(std::is_sorted(std::begin(vs), std::end(vs)));\n}\n\nint main()\n{\n    PrimitiveArrTest();\n    VecTest();\n    ArrTest();\n    DeqTest();\n    return 0;\n}\n",
+    "result": "AC"
+}

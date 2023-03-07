@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\nclass ndRep\n{\nprivate:\n    struct itr\n    {\n        itr(const Vec<int>& ns) : m_ns{ns}, m_cs(ns.size(), 0), m_end{false} {}\n        bool operator!=(const itr&) const { return not m_end; }\n        const Vec<int>& operator*() { return m_cs; }\n        itr& operator++()\n        {\n            for (const int i : per(m_ns.size())) {\n                m_cs[i]++;\n                if (m_cs[i] < m_ns[i]) {\n                    break;\n                } else {\n                    if (i == 0) { m_end = true; }\n                    m_cs[i] = 0;\n                }\n            }\n            return *this;\n        }\n        Vec<int> m_ns, m_cs;\n        bool m_end;\n    };\n    Vec<int> m_ns;\n\npublic:\n    ndRep(const Vec<int>& ns) : m_ns{ns} {}\n    itr begin() const { return itr{m_ns}; }\n    itr end() const { return itr{m_ns}; }\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/utility/nd_rep.ut.test.cpp"
+    ]
+}

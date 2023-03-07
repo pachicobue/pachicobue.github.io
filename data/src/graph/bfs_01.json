@@ -1,0 +1,5 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename T>\nVec<T> bfs01(const Graph<T>& g, int s)\n{\n    const int N = g.v();\n    assert(0 <= s and s < N);\n    Vec<T> ds(N, INF<T>);\n    using P = Pair<T, int>;\n    Deq<P> Q;\n    ds[s] = 0;\n    Q.push_front({T{}, s});\n    while (not Q.empty()) {\n        const auto [c, u] = Q.front();\n        Q.pop_front();\n        if (ds[u] < c) { continue; }\n        for (UNUSED const auto& [_, v, c] : g[u]) {\n            if (ds[v] <= ds[u] + c) { continue; }\n            ds[v] = ds[u] + c;\n            if (c == 0) {\n                Q.push_front({ds[v], v});\n            } else {\n                Q.push_back({ds[v], v});\n            }\n        }\n    }\n    return ds;\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": []
+}

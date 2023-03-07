@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/find_linear_recurrence\n#include \"formal_power_series/berlekamp_massey.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto N = in.val<int>();\n    Vec<mint> as(N);\n    for (auto& a : as) { a = in.val<int>(); }\n    const auto cs = berlekampMassey(as);\n    const int d = cs.size();\n    Vec<int> ans(d - 1);\n    for (int i : irange(1, d)) { ans[i - 1] = (-cs[i]).val(); }\n    out.ln(d - 1);\n    out.ln(ans);\n    return 0;\n}\n",
+    "result": "AC"
+}

@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\n#include \"formal_power_series/bostan_mori.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto [D, K] = in.tup<int, i64>();\n    const auto as = in.vec<mint>(D);\n    auto cs = Vec<mint>{1};\n    concat(cs, in.vec<mint>(D));\n    FormalPowerSeries<mint> f{as};\n    FormalPowerSeries<mint> g{cs};\n    for (int i : irange(1, D + 1)) { g[i] *= (-1); }\n    f = f.mult(g, D);\n    const auto ans = bostanMori(f, g, K);\n    out.ln(ans.val());\n    return 0;\n}\n",
+    "result": "AC"
+}

@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\n#include \"common/power.hpp\"\n\nconstexpr i64 mod = 1000000007;\nstruct mint\n{\n    mint() = default;\n    mint(i64 v_) : v{v_} {}\n    friend mint operator+(const mint& m1, const mint& m2) { return mint(m1.v + m2.v); }\n    friend mint operator*(const mint& m1, const mint& m2) { return mint(m1.v * m2.v % mod); }\n    friend mint& operator+=(mint& m1, const mint& m2)\n    {\n        m1 = m1 + m2;\n        return m1;\n    }\n    friend mint& operator*=(mint& m1, const mint& m2)\n    {\n        m1 = m1 * m2;\n        return m1;\n    }\n    i64 v = 0;\n};\n\nint main()\n{\n    i64 m, n;\n    std::cin >> m >> n;\n    mint M{m};\n    const mint ans = powerInt(M, n);\n    std::cout << ans.v << \"\\n\";\n    return 0;\n}\n",
+    "result": "AC"
+}

@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/counting_primes\n#include \"number/prime_power_sum.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto N = in.val<u64>();\n    if (N <= 2) { return out.ln(N == 2 ? 1 : 0); }\n    const auto powsum = PrimePowerSum<u64>(N);\n    out.ln(powsum.get(0, N));\n    return 0;\n}\n",
+    "result": "AC"
+}

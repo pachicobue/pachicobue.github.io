@@ -1,0 +1,11 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename Engine>\nclass RNG\n{\npublic:\n    using result_type = typename Engine::result_type;\n    using T = result_type;\n    static constexpr T min() { return Engine::min(); }\n    static constexpr T max() { return Engine::max(); }\n    RNG() : RNG(std::random_device{}()) {}\n    RNG(T seed) : m_rng(seed) {}\n    T operator()() { return m_rng(); }\n    template<typename T>\n    T val(T min, T max)\n    {\n        return std::uniform_int_distribution<T>(min, max)(m_rng);\n    }\n    template<typename T, typename... Args>\n    auto tup(T min, T max, const Args&... offsets)\n    {\n        return Tup<T, Args...>{val<T>(min, max), val<Args>(offsets)...};\n    }\n    template<typename T>\n    Vec<T> vec(int n, T min, T max)\n    {\n        return genVec<T>(n, [&]() { return val<T>(min, max); });\n    }\n    template<typename T>\n    Vec<Vec<T>> vvec(int n, int m, T min, T max)\n    {\n        return genVec<Vec<T>>(n, [&]() { return vec(m, min, max); });\n    }\n\nprivate:\n    Engine m_rng;\n};\ninline RNG<std::mt19937> rng;\ninline RNG<std::mt19937_64> rng64;\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/numerical/convolution.ut.test.cpp",
+        "verifications/number/mod_nthroot.yuki.test.cpp",
+        "verifications/number/prime_factors.test.cpp",
+        "verifications/number/mod_nthroot.test.cpp",
+        "verifications/utility/rng.ut.test.cpp"
+    ]
+}

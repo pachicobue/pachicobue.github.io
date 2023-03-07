@@ -1,0 +1,9 @@
+{
+    "code": "#pragma once\n#include \"../../common.hpp\"\ntemplate<typename T>\nclass FenwickTree\n{\npublic:\n    FenwickTree(const Vec<T>& vs) : m_size(vs.size()), m_cap(bitCeil(m_size)), m_vs(m_cap + 1, T{})\n    {\n        std::copy(vs.begin(), vs.end(), m_vs.begin() + 1);\n        for (int x : irange(1, m_cap)) { m_vs[x + (x & -x)] += m_vs[x]; }\n    }\n    FenwickTree(int N, const T& v = T{}) : FenwickTree{Vec<T>(N, v)} {}\n    void add(int i, const T& v)\n    {\n        assert(0 <= i and i < m_size);\n        for (int ind = i + 1; ind <= m_cap; ind += ind & (-ind)) { m_vs[ind] += v; }\n    }\n    T sum(int i) const\n    {\n        assert(0 <= i and i <= m_size);\n        T sum{};\n        for (int ind = i; ind != 0; ind &= ind - 1) { sum += m_vs[ind]; }\n        return sum;\n    }\n    T sum(int l, int r) const\n    {\n        assert(0 <= l and l <= r and r <= m_size);\n        return sum(r) - sum(l);\n    }\n    template<typename F>\n    int maxRight(F f)\n    {\n        assert(f(T{}));\n        T sum = T{};\n        int x = 0;\n        for (int k = (m_cap >> 1); k >= 1; k >>= 1) {\n            if (x + k <= m_size and f(sum + m_vs[x + k])) { sum += m_vs[x + k], x += k; }\n        }\n        return x;\n    }\n    friend Ostream& operator<<(Ostream& os, const FenwickTree& fw)\n    {\n        os << \"[\";\n        for (int i : rep(fw.m_size)) { os << (i == 0 ? \"\" : \",\") << fw.sum(i, i + 1); }\n        return (os << \"]\\n\");\n    }\n\nprivate:\n    int m_size, m_cap;\n    Vec<T> m_vs;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/data_structure/fenwick_tree/fenwick.max_right.test.cpp",
+        "verifications/data_structure/fenwick_tree/fenwick.test.cpp",
+        "verifications/algorithm/mo.test.cpp"
+    ]
+}

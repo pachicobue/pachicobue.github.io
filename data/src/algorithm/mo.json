@@ -1,0 +1,7 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\nclass Mo\n{\npublic:\n    Mo(const Vec<int>& xs, const Vec<int>& ys) : m_xs{xs}, m_ys{ys}, m_is{iotaVec(m_xs.size())}\n    {\n        sortAll(m_is, [&](int i, int j) {\n            return hilbert(m_xs[i], m_ys[i]) < hilbert(m_xs[j], m_ys[j]);\n        });\n    }\n    template<typename R, typename L, typename D, typename U, typename S>\n    void solve(R right, L left, D down, U up, S sol)\n    {\n        int x = 0, y = 0;\n        for (int ii : rep(m_xs.size())) {\n            const int i = m_is[ii];\n            const int nx = m_xs[i], ny = m_ys[i];\n            for (; x < nx; x++) { right(x, y); }\n            for (; x > nx; x--) { left(x, y); }\n            for (; y < ny; y++) { down(x, y); }\n            for (; y > ny; y--) { up(x, y); }\n            sol(i);\n        }\n    }\n\nprivate:\n    static constexpr i64 hilbert(int x, int y)\n    {\n        i64 ans = 0;\n        constexpr i64 OFFs[] = {0, 3, 1, 2};\n        for (int i : per(30)) {\n            const int S = (isBitOn(x, i) << 1) | (isBitOn(y, i));\n            ans += OFFs[S] * (1_i64 << (2 * i));\n            if (S <= 1) { std::swap(x, y); }\n            if (S == 1) { x = ~x, y = ~y; }\n        }\n        return ans;\n    }\n    Vec<int> m_xs, m_ys;\n    Vec<int> m_is;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/algorithm/mo.test.cpp"
+    ]
+}

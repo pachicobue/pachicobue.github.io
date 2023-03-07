@@ -1,0 +1,5 @@
+{
+    "code": "#pragma once\n#include \"common.hpp\"\n\nclass FloorDivs\n{\npublic:\n    FloorDivs(i64 X) : m_numerator{X}\n    {\n        assert(X >= 1);\n        for (i64 y = 1; y * y <= X; y++) { m_divs.push_back(y); }\n        const i64 Y = m_divs.back();\n        for (i64 x = X / (Y + 1); x >= 1; x--) {\n            const i64 y = X / x;\n            if (m_divs.back() < y) { m_divs.push_back(y); }\n        }\n    };\n    const Vec<i64>& divs() const { return m_divs; }\n    i64 at(int i) const\n    {\n        assert(0 <= i and i < (int)m_divs.size());\n        return m_divs[i];\n    }\n    int pos(i64 y) const\n    {\n        i64 id = 0;\n        if (y * y <= m_numerator) {\n            id = y - 1;\n        } else {\n            id = (i64)m_divs.size() - (m_numerator / y);\n        }\n        assert(m_divs[id] == y);\n        return id;\n    }\n    int divNum() const { return m_divs.size(); }\n\nprivate:\n    i64 m_numerator;\n    Vec<i64> m_divs;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": []
+}

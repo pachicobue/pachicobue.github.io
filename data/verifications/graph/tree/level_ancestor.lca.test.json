@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca\n#include \"graph/tree/level_ancestor.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    Graph g(N);\n    for (int i : irange(1, N, 1)) {\n        const int p = in.val<int>();\n        g.addEdge(p, i, true);\n    }\n    LevelAncestor la(g);\n    LOOP (Q) {\n        const auto [u, v] = in.tup<int, int>();\n        out.ln(la.lca(u, v));\n    }\n\n    return 0;\n}\n",
+    "result": "AC"
+}

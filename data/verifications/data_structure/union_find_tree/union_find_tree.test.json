@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind\n#include \"data_structure/union_find_tree/union_find_tree.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto uf = UnionFindTree(N);\n    LOOP (Q) {\n        const auto [t, u, v] = in.tup<int, int, int>();\n        if (t == 0) {\n            uf.unite(u, v);\n        } else {\n            out.ln(uf.same(u, v));\n        }\n    }\n}\n",
+    "result": "AC"
+}

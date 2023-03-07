@@ -1,0 +1,9 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename T, int n, int i = 0>\nauto ndVec(int const (&szs)[n], const T x = T{})\n{\n    if constexpr (i == n) {\n        return x;\n    } else {\n        return std::vector(szs[i], ndVec<T, n, i + 1>(szs, x));\n    }\n}\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/graph/tree/centroid_decomposition.test.cpp",
+        "verifications/linear_algebra/dynamic_matrix.test.cpp",
+        "verifications/utility/nd_vec.ut.test.cpp"
+    ]
+}

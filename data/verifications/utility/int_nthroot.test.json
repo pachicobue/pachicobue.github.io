@@ -1,0 +1,4 @@
+{
+    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/kth_root_integer\n#include \"utility/int_nthroot.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto T = in.val<int>();\n    LOOP (T) {\n        const auto [A, K] = in.tup<u64, int>();\n        out.ln(intNthRoot(A, K));\n    }\n}\n",
+    "result": "AC"
+}

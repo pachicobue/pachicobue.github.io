@@ -1,0 +1,8 @@
+{
+    "code": "#pragma once\n#include \"../common.hpp\"\nclass EratosthenesSieve\n{\npublic:\n    EratosthenesSieve(int N) : m_N{N}, m_factors{iotaVec(N)}\n    {\n        for (int i : irange(2, N)) {\n            if (m_factors[i] != i) { continue; }\n            for (int j : irange(i + i, N, i)) { m_factors[j] = i; }\n        }\n    }\n    int maxPrimeFactor(int x) const\n    {\n        assert(1 < x and x < m_N);\n        return m_factors[x];\n    }\n    bool isPrime(int x) const\n    {\n        assert(x < m_N);\n        if (x <= 1) { return false; }\n        return m_factors[x] == x;\n    }\n    Vec<int> primes() const\n    {\n        Vec<int> ps;\n        for (int i : irange(2, m_N)) {\n            if (m_factors[i] == i) { ps.push_back(i); }\n        }\n        return ps;\n    }\n    Map<int, int> primeFactors(int x) const\n    {\n        assert(1 <= x and x < m_N);\n        Map<int, int> fs;\n        while (x > 1) {\n            const int p = m_factors[x];\n            fs[p]++;\n            x /= p;\n        }\n        return fs;\n    }\n\nprivate:\n    int m_N;\n    Vec<int> m_factors;\n};\n",
+    "result": "NOT_TESTED",
+    "verified_with": [
+        "verifications/formal_dirichlet_series/gcd_convolution.test.cpp",
+        "verifications/formal_dirichlet_series/lcm_convolution.test.cpp"
+    ]
+}
