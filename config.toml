@@ -1,3 +1,22 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://pachicobue.github.io'
+title = 'bue.js'
+author = 'pachicobue'
+theme = 'hugo-PaperMod'
+languageCode = 'ja-jp'
+HasCJKLanguage = true
+DefaultContentLanguage = 'ja'
+enableEmoji = true
+enableInlineShortcodes = true
+
+
+[Params]
+description = ''
+dateformat = '2000/01/01'
+
+[taxonomies]
+tag = 'tags'
+category = 'categories'
+archive = 'archives'
+
+[markup.goldmark.renderer]
+unsafe = true
