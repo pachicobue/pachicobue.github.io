@@ -8,10 +8,28 @@ DefaultContentLanguage = 'ja'
 enableEmoji = true
 enableInlineShortcodes = true
 
-
 [Params]
 description = ''
 dateformat = '2000/01/01'
+defaultTheme = 'auto'
+
+[[menu.main]]
+identifier = 'blog'
+name = 'blog'
+url = '/blog/'
+weight = 10
+
+[[menu.main]]
+identifier = ''
+name = 'article'
+url = '/article/'
+weight = 20
+
+[[menu.main]]
+identifier = 'algolib'
+name = 'algolib'
+url = '/algolib/'
+weight = 30
 
 [taxonomies]
 tag = 'tags'
