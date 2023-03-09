@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B\n#include \"graph/bellman_ford.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto [V, E, r] = in.tup<int, int, int>();\n    Graph<int> g(V);\n    LOOP (E) {\n        const auto [u, v, c] = in.tup<int, int, int>();\n        g.addEdge(u, v, c);\n    }\n    const auto ds = bellmanFord(g, r);\n    for (int i : rep(V)) {\n        if (ds[i] <= -INF<int>) { return out.ln(\"NEGATIVE CYCLE\"); }\n    }\n    for (int i : rep(V)) {\n        if (ds[i] >= INF<int>) {\n            out.ln(\"INF\");\n        } else {\n            out.ln(ds[i]);\n        }\n    }\n    return 0;\n}\n",
-    "result": "AC"
-}

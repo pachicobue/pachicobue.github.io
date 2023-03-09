@@ -1,5 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../../common.hpp\"\nclass SegSkeleton\n{\npublic:\n    SegSkeleton(int size) : m_size(size), m_half(bitCeil(m_size)), m_segs(m_half * 2, {0, 0})\n    {\n        for (int i = 1; i <= m_half; i <<= 1) {\n            const int l = m_half / i;\n            for (int j : rep(i)) { m_segs[i + j] = {l * j, l * (j + 1)}; }\n        }\n    }\n    template<typename F>\n    void act(int l, int r, F f) const\n    {\n        assert(0 <= l and l <= r and r <= m_size);\n        int li = l + m_half, ri = r + m_half;\n        for (; li < ri; li >>= 1, ri >>= 1) {\n            if (li & 1) {\n                const auto& [xl, xr] = m_segs[li];\n                f(li++, xl, xr);\n            }\n            if (ri & 1) {\n                const auto& [xl, xr] = m_segs[--ri];\n                f(ri, xl, xr);\n            }\n        }\n    }\n\nprivate:\n    int m_size, m_half;\n    Vec<Pair<int, int>> m_segs;\n};\n",
-    "result": "NOT_TESTED",
-    "verified_with": []
-}

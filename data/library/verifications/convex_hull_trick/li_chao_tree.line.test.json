@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/line_add_get_min\n#include \"convex_hull_trick/li_chao_tree.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    auto cht = LiChaoTree<i64>(-TEN<i64>(9), TEN<i64>(9));\n    LOOP (N) {\n        const auto [a, b] = in.tup<i64, i64>();\n        cht.addLine({a, b});\n    }\n    LOOP (Q) {\n        const auto t = in.val<int>();\n        if (t == 0) {\n            const auto [a, b] = in.tup<i64, i64>();\n            cht.addLine({a, b});\n        } else {\n            const auto p = in.val<i64>();\n            const auto [ok, l] = cht.minLine(p);\n            out.ln(l.first * p + l.second);\n        }\n    }\n}\n",
-    "result": "AC"
-}

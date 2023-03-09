@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename T>\nVec<T> divisors(const T n)\n{\n    Vec<T> head, tail;\n    for (T i = 1; i * i <= n; i++) {\n        if (n % i == 0) {\n            head.push_back(i);\n            if (i * i != n) { tail.push_back(n / i); }\n        }\n    }\n    reverseAll(tail);\n    concat(head, tail);\n    return head;\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/number/divisors.test.cpp"
-    ]
-}

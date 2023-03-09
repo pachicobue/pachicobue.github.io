@@ -1,5 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\nclass StopWatch\n{\n    using SysClock = std::chrono::system_clock;\n    using Tp = SysClock::time_point;\n\npublic:\n    StopWatch() : m_start{SysClock::now()}, m_rap{m_start} {}\n    template<typename D = std::chrono::milliseconds>\n    typename D::rep rap()\n    {\n        const auto now = SysClock::now();\n        const auto ans = std::chrono::duration_cast<D>(now - m_rap).count();\n        m_rap = now;\n        return ans;\n    }\n    template<typename D = std::chrono::milliseconds>\n    typename D::rep get()\n    {\n        const auto now = SysClock::now();\n        return std::chrono::duration_cast<D>(now - m_rap).count();\n    }\n    template<typename D = std::chrono::milliseconds>\n    typename D::rep total()\n    {\n        const auto now = SysClock::now();\n        return std::chrono::duration_cast<D>(now - m_start).count();\n    }\n\nprivate:\n    Tp m_start, m_rap;\n};\n",
-    "result": "NOT_TESTED",
-    "verified_with": []
-}

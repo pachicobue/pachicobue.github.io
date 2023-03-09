@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\ntemplate<typename T>\nVec<T> setHadamard(const Vec<T>& xs, bool rev = false)\n{\n    const int N = bitCeil(xs.size());\n    Vec<T> ys(N);\n    for (int i : rep(xs.size())) { ys[i] = xs[i]; }\n    for (int i = 1; i < N; i <<= 1) {\n        for (int j : rep(N)) {\n            if ((j & i) == 0) {\n                const T x = ys[j], y = ys[j | i];\n                ys[j] = x + y, ys[j | i] = x - y;\n            }\n        }\n    }\n    if (rev) {\n        const T iN = T{1} / N;\n        for (auto& y : ys) { y *= iN; }\n    }\n    return ys;\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/set_power_series/xor_convolution.test.cpp"
-    ]
-}

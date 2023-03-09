@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"graph.hpp\"\ntemplate<typename T>\nVec<Vec<T>> floydWarshall(const Graph<T>& g)\n{\n    const int N = g.v();\n    Vec<Vec<T>> dss(N, Vec<T>(N));\n    for (int i : rep(N)) {\n        for (int j : rep(N)) { dss[i][j] = (i == j ? T{} : INF<T>); }\n        for (UNUSED const auto& [_, j, c] : g[i]) { chmin(dss[i][j], c); }\n    }\n    for (int k : rep(N)) {\n        for (int i : rep(N)) {\n            for (int j : rep(N)) {\n                if (dss[i][k] != INF<T> and dss[k][j] != INF<T>) {\n                    chmin(dss[i][j], dss[i][k] + dss[k][j]);\n                }\n            }\n        }\n    }\n    return dss;\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/graph/floyd_warshall.test.cpp"
-    ]
-}

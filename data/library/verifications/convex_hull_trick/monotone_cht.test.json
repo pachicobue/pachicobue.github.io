@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://yukicoder.me/problems/no/409\n#include \"convex_hull_trick/monotone_cht.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, A, B, W] = in.tup<int, i64, i64, i64>();\n    auto ds = Vec<i64>{0};\n    concat(ds, in.vec<i64>(N));\n    ds.push_back(0);\n    Vec<i64> dp(N + 2, INF<i64>);\n    dp[0] = 0;\n    MonotoneCHT<i64> cht;\n    for (int i : rep(N + 2)) {\n        if (i != 0) {\n            const auto [a, b] = cht.minLine(i);\n            dp[i] = ds[i] * 2 - A * (i - 1) * 2 + B * i * i + (a * i + b);\n        }\n        cht.addLine(-B * (2 * i + 1), dp[i] + A * 2 * i + B * (i + 1) * i);\n    }\n    out.ln(W + dp.back() / 2);\n\n    return 0;\n}\n",
-    "result": "AC"
-}

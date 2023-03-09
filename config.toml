@@ -28,7 +28,7 @@ weight = 20
 [[menu.main]]
 identifier = 'algolib'
 name = 'algolib'
-url = '/algolib/'
+url = '/library/'
 weight = 30
 
 [taxonomies]

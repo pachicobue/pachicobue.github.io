@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://yukicoder.me/problems/no/184\n#include \"linear_algebra/bit_bases.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto N = in.val<int>();\n    BitBases<64> bases;\n    LOOP (N) {\n        const auto a = in.val<u64>();\n        bases.add(a);\n    }\n    out.ln(1_u64 << bases.rank());\n    return 0;\n}\n",
-    "result": "AC"
-}

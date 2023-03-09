@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/bitwise_xor_convolution\n#include \"set_power_series/xor_convolution.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto n = in.val<int>();\n    const int N = 1 << n;\n    const auto as = in.vec<mint>(N);\n    const auto bs = in.vec<mint>(N);\n    const auto cs = xorConvolute(as, bs);\n    std::vector<int> ans(cs.size());\n    for (int i : rep(N)) { ans[i] = cs[i].val(); }\n    out.ln(ans);\n    return 0;\n}\n",
-    "result": "AC"
-}

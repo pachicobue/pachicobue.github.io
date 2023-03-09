@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../../common.hpp\"\nclass UnionFindTree\n{\npublic:\n    UnionFindTree(int n) : m_v{n}, m_roots{iotaVec(n)}, m_sizes(m_v, 1) {}\n    int find(int i)\n    {\n        if (m_roots[i] == i) {\n            return i;\n        } else {\n            return m_roots[i] = find(m_roots[i]);\n        }\n    }\n    bool unite(int i, int j)\n    {\n        i = find(i), j = find(j);\n        if (i == j) { return false; }\n        if (size(i) > size(j)) { std::swap(i, j); }\n        m_roots[i] = j;\n        m_sizes[j] += m_sizes[i];\n        return true;\n    }\n    bool same(int i, int j) { return find(i) == find(j); }\n    int size(int i) { return m_sizes[find(i)]; }\n    Vec<Vec<int>> groups()\n    {\n        Vec<Vec<int>> iss(m_v);\n        for (const int i : rep(m_v)) { iss[find(i)].push_back(i); }\n        return iss;\n    }\n\nprivate:\n    int m_v;\n    Vec<int> m_roots;\n    Vec<int> m_sizes;\n};\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/data_structure/union_find_tree/union_find_tree.test.cpp"
-    ]
-}

@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/matrix_product\n#include \"linear_algebra/dynamic_matrix.hpp\"\n#include \"utility/nd_vec.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    using mint = modint_998244353;\n    const auto [N, M, K] = in.tup<int, int, int>();\n    DynamicMatrix<mint> A(N, M);\n    for (int i : rep(N)) {\n        for (int j : rep(M)) { A[i][j] = in.val<mint>(); }\n    }\n    DynamicMatrix<mint> B(M, K);\n    for (int i : rep(M)) {\n        for (int j : rep(K)) { B[i][j] = in.val<mint>(); }\n    }\n    const auto C = A * B;\n    auto ans = ndVec<mint>({N, K});\n    for (int i : rep(N)) {\n        for (int k : rep(K)) { ans[i][k] = C[i][k]; }\n    }\n    out.ln(ans);\n    return 0;\n}\n",
-    "result": "AC"
-}

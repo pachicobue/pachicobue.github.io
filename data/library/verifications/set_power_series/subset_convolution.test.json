@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/subset_convolution\n#include \"set_power_series/subset_convolution.hpp\"\n#include \"utility/modint.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    using mint = modint_998244353;\n    const auto N = in.val<int>();\n    const auto as = in.vec<mint>(1 << N);\n    const auto bs = in.vec<mint>(1 << N);\n    const auto cs = subsetConvolute(as, bs);\n    Vec<int> ans(cs.size());\n    for (int i : rep(1 << N)) { ans[i] = cs[i].val(); }\n    out.ln(ans);\n    return 0;\n}\n",
-    "result": "AC"
-}

@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: UNITTEST\n#include \"common/container_op.hpp\"\n\nvoid PrimitiveArrTest()\n{\n    int vs[5] = {1, 3, 5, 2, 4};\n    reverseAll(vs);\n    int rvs[5] = {4, 2, 5, 3, 1};\n    for (int i = 0; i < 5; i++) { assert(vs[i] == rvs[i]); }\n}\nvoid VecTest()\n{\n    Vec<int> vs = {1, 3, 5, 2, 4};\n    reverseAll(vs);\n    Vec<int> rvs = {4, 2, 5, 3, 1};\n    for (int i = 0; i < 5; i++) { assert(vs[i] == rvs[i]); }\n}\nvoid ArrTest()\n{\n    Arr<int, 5> vs = {1, 3, 5, 2, 4};\n    reverseAll(vs);\n    Arr<int, 5> rvs = {4, 2, 5, 3, 1};\n    for (int i = 0; i < 5; i++) { assert(vs[i] == rvs[i]); }\n}\nvoid DeqTest()\n{\n    Deq<int> vs = {1, 3, 5, 2, 4};\n    reverseAll(vs);\n    Deq<int> rvs = {4, 2, 5, 3, 1};\n    for (int i = 0; i < 5; i++) { assert(vs[i] == rvs[i]); }\n}\n\nint main()\n{\n    PrimitiveArrTest();\n    VecTest();\n    ArrTest();\n    DeqTest();\n    return 0;\n}\n",
-    "result": "AC"
-}

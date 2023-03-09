@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/suffixarray\n#include \"string/suffix_array.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\n\nint main()\n{\n    const auto S = in.val<Str>();\n    const auto SA = suffixArray(S);\n    out.ln(SA);\n    return 0;\n}\n",
-    "result": "AC"
-}

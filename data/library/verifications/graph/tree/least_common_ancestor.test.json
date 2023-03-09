@@ -1,4 +1,0 @@
-{
-    "code": "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca\n#include \"graph/tree/least_common_ancestor.hpp\"\n#include \"utility/printer.hpp\"\n#include \"utility/scanner.hpp\"\nint main()\n{\n    const auto [N, Q] = in.tup<int, int>();\n    Graph g(N);\n    for (int i : irange(1, N)) {\n        const int p = in.val<int>();\n        g.addEdge(p, i, true);\n    }\n    const auto lca = LowestCommonAncestor(g, 0);\n    LOOP (Q) {\n        const auto [u, v] = in.tup<int, int>();\n        const int l = lca(u, v);\n        out.ln(l);\n    }\n    return 0;\n}\n",
-    "result": "AC"
-}

@@ -1,7 +1,0 @@
-{
-    "code": "#pragma once\n#include \"../common.hpp\"\n#include \"../utility/int_nthroot.hpp\"\n\n// f^n(x) = y \u3068\u306a\u308b\u6700\u5c0f\u306en\ntemplate<typename T, typename FW, typename FINV>\ni64 babyStepGiantStep(FW f_wtimes, FINV f_inv, const T& x, const T& y, i64 N, i64 W)\n{\n    const i64 M = ceilDiv(N, W);\n    UMap<T, i64> memo;\n    memo[x] = 1;\n    T gx = 1;\n    for (i64 i : irange(1, M + 1)) {\n        gx = f_wtimes(gx);\n        if (memo.count(gx) == 0) { memo[gx] = i * W; }\n    }\n\n    i64 ans = INF<i64>;\n    T sy = y;\n    for (i64 w : rep(W)) {\n        if (memo.count(sy)) { chmin(ans, memo[sy] + w); }\n        sy = f_inv(sy);\n    }\n    return (ans == INF<i64> ? -1_i64 : ans);\n}\n",
-    "result": "NOT_TESTED",
-    "verified_with": [
-        "verifications/number/discrete_log.test.cpp"
-    ]
-}
