@@ -1,7 +1,7 @@
----
-title: Bit Vector
-layout: source
----
++++
+title = "Bit Vector"
+draft = false
++++
 
 ## 概要
 

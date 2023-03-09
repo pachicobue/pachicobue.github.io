@@ -1,7 +1,7 @@
----
-title: Lazy Segment Tree
-layout: source
----
++++
+title = "Lazy Segment Tree"
+draft = false
++++
 
 ## 概要
 

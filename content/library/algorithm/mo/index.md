@@ -1,7 +1,7 @@
----
-title: Mo's Algorithm
-layout: source
----
++++
+title = "Mo's Algorithm"
+draft = false
++++
 
 ## 概要
 
@@ -12,7 +12,6 @@ $(0,0)$ からスタートして隣り合う格子点に移動することを繰
 ブロックサイズ $B$ ごとにブロック分けして $\lbrace P _ 0, \dots, P _ {N-1} \rbrace$ をたどる順番をいい感じにすると、移動回数を $\mathrm{O}(BN+\frac{L^2}{B})$ にできる。  
 $B = \sqrt{\frac{L^2}{N}}$ に設定することで、移動回数は $\mathrm{O}(L\sqrt{N})$ になる。
 
-![Mo's algorithm](https://pachicobue.github.io/algolib/mo.png)
 
 この話を応用すると、連続部分列に対する オフラインクエリ みたいなものに適用できる。  
 

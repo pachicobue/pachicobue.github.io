@@ -1,7 +1,7 @@
----
-title: 単調性のある Convex Hull Trick
-layout: source
----
++++
+title = "単調性のある Convex Hull Trick"
+draft = false
++++
 
 ## 概要
 

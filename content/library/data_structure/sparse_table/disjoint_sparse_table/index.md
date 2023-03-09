@@ -1,7 +1,7 @@
----
-title: Disjoint Sparse Table
-layout: source
----
++++
+title = "Disjoint Sparse Table"
+draft = false
++++
 
 ## 概要
 

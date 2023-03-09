@@ -1,7 +1,7 @@
----
-title: Segment Tree
-layout: source
----
++++
+title = "Segment Tree"
+draft = false
++++
 
 ## 概要
 

@@ -1,7 +1,7 @@
----
-title: Union Find Tree
-layout: source
----
++++
+title = "Union Find Tree"
+draft = false
++++
 
 ## 概要
 

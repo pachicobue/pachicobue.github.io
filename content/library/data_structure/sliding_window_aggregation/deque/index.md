@@ -1,7 +1,7 @@
----
-title: Sliding Window Aggregation(Deque)
-layout: source
----
++++
+title = "Sliding Window Aggregation(Deque)"
+draft = false
++++
 
 ## 概要
 

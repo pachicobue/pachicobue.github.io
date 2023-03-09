@@ -1,7 +1,7 @@
----
-title: Printer (出力補助クラス)
-layout: source
----
++++
+title = "Printer (出力補助クラス)"
+draft = false
++++
 
 ## 概要
 

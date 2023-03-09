@@ -1,9 +1,9 @@
 {{- if .Pages}}
 <li>{{ .Title }}</li>
 {{- else}}
-{{ $src_path := replace .Path "library/" "" }}
+{{ $src_path := printf "%s.hpp" (path.Dir (replace .File "library/" "")) }}
 {{ $result := index (index .Site.Data.library.src_stats $src_path) "result" }}
 <li>
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a> {{- partial "result_emoji" -}}
+    {{- partial "result_emoji" $result -}} <a href="{{ .RelPermalink }}">{{ .Title }}</a>
 </li>
 {{- end}}

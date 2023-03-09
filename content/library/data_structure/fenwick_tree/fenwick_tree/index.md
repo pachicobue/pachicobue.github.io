@@ -1,7 +1,7 @@
----
-title: Fenwick Tree
-layout: source
----
++++
+title = "Fenwick Tree"
+draft = false
++++
 
 ## 概要
 

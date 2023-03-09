@@ -1,7 +1,7 @@
----
-title: Scanner (入力補助クラス)
-layout: source
----
++++
+title = "Scanner (入力補助クラス)"
+draft = false
++++
 
 ## 概要
 

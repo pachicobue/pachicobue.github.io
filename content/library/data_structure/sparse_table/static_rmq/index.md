@@ -1,7 +1,7 @@
----
-title: 静的数列のRMQ
-layout: source
----
++++
+title = "静的数列のRMQ"
+draft = false
++++
 
 ## 概要
 

@@ -1,7 +1,7 @@
----
-title: Li Chao Tree
-layout: source
----
++++
+title = "Li Chao Tree"
+draft = false
++++
 
 ## 概要
 

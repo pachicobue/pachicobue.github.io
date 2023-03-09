@@ -1,7 +1,7 @@
----
-title: 二重辺連結成分分解
-layout: source
----
++++
+title = "二重辺連結成分分解"
+draft = false
++++
 
 ## 概要
 

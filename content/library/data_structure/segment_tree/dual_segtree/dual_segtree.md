@@ -1,7 +1,7 @@
----
-title: Dual Segment Tree
-layout: source
----
++++
+title = "Dual Segment Tree"
+draft = false
++++
 
 ## 概要
 
