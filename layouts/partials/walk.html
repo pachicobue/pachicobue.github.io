@@ -1,0 +1,8 @@
+<ul>
+    {{- range .Pages.ByTitle}}
+    {{- partial "source_link.html" . -}}
+    {{- if .Pages}}
+    {{- partial "walk.html" . -}}
+    {{- end}}
+    {{- end}}
+</ul>

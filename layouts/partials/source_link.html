@@ -1,0 +1,9 @@
+{{- if .Pages}}
+<li>{{ .Title }}</li>
+{{- else}}
+{{ $src_path := replace .Path "library/" "" }}
+{{ $result := index (index .Site.Data.library.src_stats $src_path) "result" }}
+<li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a> {{- partial "result_emoji" -}}
+</li>
+{{- end}}

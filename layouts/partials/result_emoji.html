@@ -1,0 +1,9 @@
+{{- if eq . "ALL_AC" }}
+{{ emojify ":heavy_check_mark:" }}
+{{- else if eq . "SOME_WA_TLE_RE" }}
+{{ emojify ":x:" }}
+{{- else if eq . "NOT_TESTED" }}
+{{ emojify ":question:" }}
+{{- else }}
+{{ emojify ":warning:" }}
+{{- end}}
