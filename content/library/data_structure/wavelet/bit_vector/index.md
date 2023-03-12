@@ -1,6 +1,7 @@
 +++
 title = "Bit Vector"
 draft = false
+math = true
 +++
 
 ## 概要

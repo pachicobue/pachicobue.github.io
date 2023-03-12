@@ -1,6 +1,7 @@
 +++
 title = "Mo's Algorithm"
 draft = false
+math = true
 +++
 
 ## 概要
@@ -31,6 +32,8 @@ $B = \sqrt{\frac{L^2}{N}}$ に設定することで、移動回数は $\mathrm{O
 
 (値，個数)の集合,値の種類数 を管理しつつ、要素の 挿入/削除 を捌けばいい。  
 これは $\mathrm{O}(1)$ で更新できるので、この問題は $\mathrm{O}(N\sqrt{N})$ で解ける。
+
+---
 
 ## I/F
 

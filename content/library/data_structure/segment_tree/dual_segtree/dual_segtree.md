@@ -1,6 +1,7 @@
 +++
 title = "Dual Segment Tree"
 draft = false
+math = true
 +++
 
 ## 概要

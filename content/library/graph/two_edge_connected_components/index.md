@@ -1,6 +1,7 @@
 +++
 title = "二重辺連結成分分解"
 draft = false
+math = true
 +++
 
 ## 概要

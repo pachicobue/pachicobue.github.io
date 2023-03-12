@@ -1,6 +1,7 @@
 +++
 title = "Disjoint Sparse Table"
 draft = false
+math = true
 +++
 
 ## 概要

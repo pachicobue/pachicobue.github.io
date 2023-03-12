@@ -1,6 +1,7 @@
 +++
 title = "Printer (出力補助クラス)"
 draft = false
+math = true
 +++
 
 ## 概要

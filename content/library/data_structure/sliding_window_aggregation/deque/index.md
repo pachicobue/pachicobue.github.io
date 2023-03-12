@@ -1,6 +1,7 @@
 +++
 title = "Sliding Window Aggregation(Deque)"
 draft = false
+math = true
 +++
 
 ## 概要

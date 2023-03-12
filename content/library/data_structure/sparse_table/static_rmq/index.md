@@ -1,6 +1,7 @@
 +++
 title = "静的数列のRMQ"
 draft = false
+math = true
 +++
 
 ## 概要

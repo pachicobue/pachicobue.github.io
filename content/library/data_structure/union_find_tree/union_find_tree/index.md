@@ -1,6 +1,7 @@
 +++
 title = "Union Find Tree"
 draft = false
+math = true
 +++
 
 ## 概要

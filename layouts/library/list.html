@@ -11,20 +11,6 @@
     {{- else }}{{ .Content }}{{ end }}
 
     {{- partial "walk.html" . -}}
-    {{/* <ul>
-        {{ range $dir_name, $sub_datas := $.Site.Data.library.src }}
-        {{ with .Param 'result' }}
-        {{ else }}
-        {{ end }}
-        <li> {{ $dir_name }}
-            <ul>
-                {{ range $data_name, $data_content := $sub_datas}}
-                <li>{{ $data_name }}</li>
-                {{ end }}
-            </ul>
-        </li>
-        {{ end }}
-    </ul> */}}
 </div>
 
 {{- end }}{{- /* end main */ -}}

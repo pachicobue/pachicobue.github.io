@@ -10,14 +10,8 @@ enableInlineShortcodes = true
 
 [Params]
 description = ''
-dateformat = '2000/01/01'
+dateformat = '2006/01/02'
 defaultTheme = 'auto'
-
-[[menu.main]]
-identifier = 'blog'
-name = 'blog'
-url = '/blog/'
-weight = 10
 
 [[menu.main]]
 identifier = ''
@@ -38,3 +32,14 @@ archive = 'archives'
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "github-dark"
+    tabWidth = 4

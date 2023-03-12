@@ -1,6 +1,7 @@
 +++
 title = "単調性のある Convex Hull Trick"
 draft = false
+math = true
 +++
 
 ## 概要
