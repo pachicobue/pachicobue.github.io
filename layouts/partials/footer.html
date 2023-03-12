@@ -14,7 +14,6 @@
 {{- end }}
 
 {{ range .Site.Params.custom_css -}}
-{{ print . }}
 <link rel="stylesheet" href="{{ . | absURL }}">
 {{- end }}
 
