@@ -12,12 +12,8 @@ enableInlineShortcodes = true
 description = ''
 dateformat = '2006/01/02'
 defaultTheme = 'auto'
-
-[[menu.main]]
-identifier = ''
-name = 'article'
-url = '/article/'
-weight = 20
+custom_css = ["/css/lib.css"]
+indexSections = ["article"]
 
 [[menu.main]]
 identifier = 'algolib'

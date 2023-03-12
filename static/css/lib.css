@@ -1,0 +1,10 @@
+.lib-dir {
+    font-weight: bold;
+}
+
+.lib-path {
+    margin: 0;
+    padding: 0;
+    height: 60%;
+    font-size: 60%;
+}

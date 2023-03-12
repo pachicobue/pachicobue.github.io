@@ -16,6 +16,11 @@ _blog_dir: Path = _content_dir / "blog"
 _article_dir: Path = _content_dir / "article"
 
 
+def new_article(name: str):
+    command: List[str] = ["hugo", "new", "--kind", "article", "article/{}".format(name)]
+    subprocess.check_call(command)
+
+
 def new_blog():
     date_str: str = datetime.date.today().strftime("%Y-%m-%d")
     command: List[str] = ["hugo", "new", "--kind", "blog", "blog/{}".format(date_str)]
@@ -68,18 +73,22 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Hugo newのwrapper")
     subparser = parser.add_subparsers(dest="subcommand")
 
+    parser_article = subparser.add_parser("article", help="article記事の追加")
+    parser_article.add_argument("name", help="記事名")
+
     parser_blog = subparser.add_parser("blog", help="blog記事の追加")
-    parser_blog.set_defaults(handler=new_blog)
 
     parser_library = subparser.add_parser("lib", help="library記事の追加")
     parser_library.add_argument("--all", action="store_true", help="全ての存在しない記事を作成")
     parser_library.add_argument(
         "--name", help="単一記事を作成 src/からの相対パス(ex. `algorithm/mo`)"
     )
-    parser_library.set_defaults(handler=new_lib)
 
     args = parser.parse_args()
-    if args.subcommand == "blog":
+    if args.subcommand == "article":
+        print(args.name)
+        new_article(args.name)
+    elif args.subcommand == "blog":
         new_blog()
     elif args.subcommand == "lib":
         new_lib(args.all, args.name)
