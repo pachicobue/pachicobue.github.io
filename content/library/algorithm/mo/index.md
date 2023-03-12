@@ -2,6 +2,7 @@
 title = "Mo's Algorithm"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

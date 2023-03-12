@@ -9,42 +9,32 @@
     <header class="post-header">
         <h1 class="post-title">
             {{- partial "result_emoji" $result -}}{{ .Title }}
-            {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
         </h1>
     </header>
     {{- if (.Param "ShowToc") }}
     {{- partial "toc.html" . }}
     {{- end }}
 
-    {{- if .Content }}
     <div class="post-content">
-        {{- if not (.Param "disableAnchoredHeadings") }}
         {{- partial "anchored_headings.html" .Content -}}
-        {{- else }}
-        {{ .Content }}
-        {{ end }}
     </div>
 
     <hr>
 
-    <h2>Code</h2>
+    <h2 id="code">
+        Code<a hidden class="anchor" aria-hidden="true" href="#code">#</a>
+    </h2>
     <div class="post-content">
-        {{ $src_path := printf "%s.hpp" (path.Dir (replace .File "library/" "")) }}
-        {{ $code := index (index .Site.Data.library.src_stats $src_path) "code" }}
         {{highlight $code "cpp"}}
     </div>
-    {{- end }}
 
     <footer class="post-footer">
         {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
         <ul class="post-tags">
             {{- range ($.GetTerms $tags) }}
-            <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+            <li><a href="{{ .Permalink }}">{{emojify ":bookmark:"}}{{ .LinkTitle }}</a></li>
             {{- end }}
         </ul>
-        {{- if (.Param "ShowPostNavLinks") }}
-        {{- partial "post_nav_links.html" . }}
-        {{- end }}
     </footer>
 </article>
 

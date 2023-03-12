@@ -2,6 +2,7 @@
 title = "静的数列のRMQ"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

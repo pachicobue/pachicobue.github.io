@@ -2,6 +2,7 @@
 title = "Printer (出力補助クラス)"
 draft = false
 math = true
+shwoToc = true
 +++
 
 ## 概要

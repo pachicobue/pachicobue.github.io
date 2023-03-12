@@ -2,6 +2,7 @@
 title = "Union Find Tree"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

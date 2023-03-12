@@ -1,3 +1,3 @@
 +++
-title = "data_structure/segment_tree/"
+title = "data_structure/segment_tree"
 +++

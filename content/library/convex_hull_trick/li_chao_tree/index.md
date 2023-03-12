@@ -2,6 +2,7 @@
 title = "Li Chao Tree"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

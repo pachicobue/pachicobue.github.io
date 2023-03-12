@@ -2,6 +2,7 @@
 title = "Scanner (入力補助クラス)"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

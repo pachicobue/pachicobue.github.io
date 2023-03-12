@@ -1,3 +1,3 @@
 +++
-title = "data_structure/"
+title = "data_structure"
 +++

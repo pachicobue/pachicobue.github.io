@@ -1,3 +1,3 @@
 +++
-title = "data_structure/union_find_tree/"
+title = "data_structure/union_find_tree"
 +++

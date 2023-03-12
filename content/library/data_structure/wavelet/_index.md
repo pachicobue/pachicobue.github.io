@@ -1,3 +1,3 @@
 +++
-title = "data_structure/wavelet/"
+title = "data_structure/wavelet"
 +++

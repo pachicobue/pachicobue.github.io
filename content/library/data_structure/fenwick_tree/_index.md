@@ -1,3 +1,3 @@
 +++
-title = "data_structure/fenwick_tree/"
+title = "data_structure/fenwick_tree"
 +++

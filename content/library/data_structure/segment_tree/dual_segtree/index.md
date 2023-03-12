@@ -2,6 +2,7 @@
 title = "Dual Segment Tree"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

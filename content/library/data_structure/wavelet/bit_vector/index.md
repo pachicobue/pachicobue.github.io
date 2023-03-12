@@ -2,6 +2,7 @@
 title = "Bit Vector"
 draft = false
 math = true
+showToc = true
 +++
 
 ## 概要

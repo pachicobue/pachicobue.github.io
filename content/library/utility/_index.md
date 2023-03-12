@@ -1,3 +1,3 @@
 +++
-title = "utility/"
+title = "utility"
 +++

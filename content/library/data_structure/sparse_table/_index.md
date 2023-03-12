@@ -1,3 +1,3 @@
 +++
-title = "data_structrure/sparse_table"
+title = "data_structure/sparse_table"
 +++

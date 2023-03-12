@@ -1,3 +1,3 @@
 +++
-title = "convex_hull_trick/"
+title = "convex_hull_trick"
 +++
