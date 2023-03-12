@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${workspaceFolder}"
+    },
+    "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+    },
+    "type": "shell",
+    "problemMatcher": [],
+    "inputs": [
+        {
+            "id": "FileName",
+            "type": "promptString",
+            "description": "作成する記事名(alphabet)"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Create New Article",
+            "detail": "新規Articleを作成",
+            "command": "python3",
+            "args": [
+                "script/new.py",
+                "article",
+                "${input:FileName}"
+            ]
+        },
+        {
+            "label": "Create New Blog",
+            "detail": "新規Blogを作成",
+            "command": "python3",
+            "args": [
+                "script/new.py",
+                "blog"
+            ]
+        }
+    ]
+}
