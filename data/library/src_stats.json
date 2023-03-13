@@ -20,62 +20,62 @@
         "result": "ALL_AC"
     },
     "common.hpp": {
-        "code": "#pragma once\n#include \"common/type.hpp\"\n#include \"common/environment.hpp\"\n#include \"common/macro.hpp\"\n#include \"common/constant.hpp\"\n#include \"common/chminmax.hpp\"\n#include \"common/int_div.hpp\"\n#include \"common/power.hpp\"\n#include \"common/container_op.hpp\"\n#include \"common/show.hpp\"\n#include \"common/bit_op.hpp\"\n#include \"common/fixpoint.hpp\"\n#include \"common/irange.hpp\"\n",
+        "code": "#pragma once\n#include \"internal/type.hpp\"\n#include \"internal/environment.hpp\"\n#include \"internal/macro.hpp\"\n#include \"internal/constant.hpp\"\n#include \"internal/chminmax.hpp\"\n#include \"internal/int_div.hpp\"\n#include \"internal/power.hpp\"\n#include \"internal/container_op.hpp\"\n#include \"internal/show.hpp\"\n#include \"internal/bit_op.hpp\"\n#include \"internal/fixpoint.hpp\"\n#include \"internal/irange.hpp\"\n",
         "result": "ALL_AC"
     },
-    "common/bit_op.hpp": {
+    "internal/bit_op.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\nconstexpr int popCount(u64 v) { return v ? __builtin_popcountll(v) : 0; }\nconstexpr int topBit(u64 v) { return v == 0 ? -1 : 63 - __builtin_clzll(v); }\nconstexpr int lowBit(u64 v) { return v == 0 ? 64 : __builtin_ctzll(v); }\nconstexpr int bitWidth(u64 v) { return topBit(v) + 1; }\nconstexpr u64 bitCeil(u64 v) { return v ? (1_u64 << bitWidth(v - 1)) : 1_u64; }\nconstexpr u64 bitFloor(u64 v) { return v ? (1_u64 << topBit(v)) : 0_u64; }\nconstexpr bool hasSingleBit(u64 v) { return (v > 0) and ((v & (v - 1)) == 0); }\nconstexpr bool isBitOn(u64 mask, int ind) { return (mask >> ind) & 1_u64; }\nconstexpr bool isBitOff(u64 mask, int ind) { return not isBitOn(mask, ind); }\nconstexpr u64 bitMask(int bitWidth) { return (bitWidth == 64 ? ~0_u64 : (1_u64 << bitWidth) - 1); }\nconstexpr u64 bitMask(int start, int end) { return bitMask(end - start) << start; }\n",
         "result": "ALL_AC"
     },
-    "common/chminmax.hpp": {
+    "internal/chminmax.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\ntemplate<typename T>\nconstexpr bool chmin(T& a, const T& b)\n{\n    return (a > b ? (a = b, true) : false);\n}\ntemplate<typename T>\nconstexpr bool chmax(T& a, const T& b)\n{\n    return (a < b ? (a = b, true) : false);\n}\n",
         "result": "ALL_AC"
     },
-    "common/constant.hpp": {
+    "internal/constant.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\ntemplate<typename T>\nconstexpr T LIMMIN = std::numeric_limits<T>::min();\ntemplate<typename T>\nconstexpr T LIMMAX = std::numeric_limits<T>::max();\ntemplate<typename T>\nconstexpr T INF = (LIMMAX<T> - 1) / 2;\ntemplate<typename T>\nconstexpr T PI = T{3.141592653589793238462643383279502884};\ntemplate<typename T = u64>\nconstexpr T TEN(int n)\n{\n    return n == 0 ? T{1} : TEN<T>(n - 1) * T{10};\n}\n",
         "result": "ALL_AC"
     },
-    "common/container_op.hpp": {
+    "internal/container_op.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\n#include \"macro.hpp\"\ntemplate<typename Vs, typename V>\nconstexpr void fillAll(Vs& arr, const V& v)\n{\n    if constexpr (std::is_convertible<V, Vs>::value) {\n        arr = v;\n    } else {\n        for (auto& subarr : arr) { fillAll(subarr, v); }\n    }\n}\ntemplate<typename Vs>\nconstexpr void sortAll(Vs& vs)\n{\n    std::sort(ALL(vs));\n}\ntemplate<typename Vs, typename C>\nconstexpr void sortAll(Vs& vs, C comp)\n{\n    std::sort(ALL(vs), comp);\n}\ntemplate<typename Vs>\nconstexpr void reverseAll(Vs& vs)\n{\n    std::reverse(ALL(vs));\n}\ntemplate<typename Vs>\nconstexpr Vs reversed(const Vs& vs)\n{\n    auto rvs = vs;\n    reverseAll(rvs);\n    return rvs;\n}\ntemplate<typename V, typename Vs>\nconstexpr V sumAll(const Vs& vs)\n{\n    if constexpr (std::is_convertible<Vs, V>::value) {\n        return static_cast<V>(vs);\n    } else {\n        V ans = 0;\n        for (const auto& v : vs) { ans += sumAll<V>(v); }\n        return ans;\n    }\n}\ntemplate<typename Vs>\nconstexpr int minInd(const Vs& vs)\n{\n    return std::min_element(ALL(vs)) - std::begin(vs);\n}\ntemplate<typename Vs>\nconstexpr int maxInd(const Vs& vs)\n{\n    return std::max_element(ALL(vs)) - std::begin(vs);\n}\ntemplate<typename Vs, typename V>\nconstexpr int lbInd(const Vs& vs, const V& v)\n{\n    return std::lower_bound(ALL(vs), v) - std::begin(vs);\n}\ntemplate<typename Vs, typename V>\nconstexpr int ubInd(const Vs& vs, const V& v)\n{\n    return std::upper_bound(ALL(vs), v) - std::begin(vs);\n}\ntemplate<typename Vs, typename V>\nconstexpr void plusAll(Vs& vs, const V& v)\n{\n    for (auto& v_ : vs) { v_ += v; }\n}\ntemplate<typename Vs>\nconstexpr void concat(Vs& vs1, const Vs& vs2)\n{\n    std::copy(ALL(vs2), std::back_inserter(vs1));\n}\ntemplate<typename Vs>\nconstexpr void concatted(const Vs& vs1, const Vs& vs2)\n{\n    auto vs = vs1;\n    concat(vs, vs2);\n    return vs;\n}\ntemplate<typename T, typename F>\nconstexpr Vec<T> genVec(int n, F gen)\n{\n    Vec<T> ans;\n    std::generate_n(std::back_inserter(ans), n, gen);\n    return ans;\n}\ntemplate<typename T = int>\nconstexpr Vec<T> iotaVec(int n, T offset = 0)\n{\n    Vec<T> ans(n);\n    std::iota(ALL(ans), offset);\n    return ans;\n}\ntemplate<typename Vs>\nconstexpr void rearrange(Vs& vs, const Vec<int>& is)\n{\n    auto vs_ = vs;\n    for (int i = 0; i < (int)is.size(); i++) { vs[i] = vs_[is[i]]; }\n}\ninline Vec<int> reversePerm(const Vec<int>& is)\n{\n    auto ris = is;\n    for (int i = 0; i < (int)is.size(); i++) { ris[is[i]] = i; }\n    return ris;\n}\n",
         "result": "ALL_AC"
     },
-    "common/environment.hpp": {
+    "internal/environment.hpp": {
         "code": "#pragma once\n#ifdef HOGEPACHI\nconstexpr bool LOCAL = true;\n#else\nconstexpr bool LOCAL = false;\n#endif\nconstexpr bool OJ = not LOCAL;\n\ntemplate<typename T>\nstatic constexpr T OjLocal(T oj, T local)\n{\n    return LOCAL ? local : oj;\n}\n",
         "result": "ALL_AC"
     },
-    "common/fixpoint.hpp": {
+    "internal/fixpoint.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\ntemplate<typename F>\nstruct Fix : F\n{\n    constexpr Fix(F&& f) : F{std::forward<F>(f)} {}\n    template<typename... Args>\n    constexpr auto operator()(Args&&... args) const\n    {\n        return F::operator()(*this, std::forward<Args>(args)...);\n    }\n};\n",
         "result": "ALL_AC"
     },
-    "common/int_div.hpp": {
+    "internal/int_div.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\ntemplate<typename T>\nconstexpr T floorDiv(T x, T y)\n{\n    assert(y != 0);\n    if (y < 0) { x = -x, y = -y; }\n    return x >= 0 ? x / y : (x - y + 1) / y;\n}\ntemplate<typename T>\nconstexpr T ceilDiv(T x, T y)\n{\n    assert(y != 0);\n    if (y < 0) { x = -x, y = -y; }\n    return x >= 0 ? (x + y - 1) / y : x / y;\n}\n",
         "result": "ALL_AC"
     },
-    "common/irange.hpp": {
+    "internal/irange.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\n#include \"macro.hpp\"\nclass irange\n{\nprivate:\n    struct itr\n    {\n        constexpr itr(i64 start = 0, i64 step = 1) : m_cnt{start}, m_step{step} {}\n        constexpr bool operator!=(const itr& it) const { return m_cnt != it.m_cnt; }\n        constexpr i64 operator*() { return m_cnt; }\n        constexpr itr& operator++() { return m_cnt += m_step, *this; }\n        i64 m_cnt, m_step;\n    };\n    i64 m_start, m_end, m_step;\n\npublic:\n    static constexpr i64 cnt(i64 start, i64 end, i64 step)\n    {\n        if (step == 0) { return -1; }\n        const i64 d = (step > 0 ? step : -step);\n        const i64 l = (step > 0 ? start : end);\n        const i64 r = (step > 0 ? end : start);\n        i64 n = (r - l) / d + ((r - l) % d ? 1 : 0);\n        if (l >= r) { n = 0; }\n        return n;\n    }\n    constexpr irange(i64 start, i64 end, i64 step = 1)\n        : m_start{start}, m_end{m_start + step * cnt(start, end, step)}, m_step{step}\n    {\n        assert(step != 0);\n    }\n    constexpr itr begin() const { return itr{m_start, m_step}; }\n    constexpr itr end() const { return itr{m_end, m_step}; }\n};\nconstexpr irange rep(i64 end) { return irange(0, end, 1); }\nconstexpr irange per(i64 rend) { return irange(rend - 1, -1, -1); }\n#define LOOP(n) for (auto _ UNUSED : rep(n))\n",
         "result": "ALL_AC"
     },
-    "common/macro.hpp": {
+    "internal/macro.hpp": {
         "code": "#pragma once\n#define CAT(x, y) x##y\n#define CAT2(x, y) CAT(x, y)\n\n#define UNUSED [[maybe_unused]]\n#define _ CAT2(_temp_name_, __COUNTER__)\n#define ALL(vs) std::begin(vs), std::end(vs)\n",
         "result": "ALL_AC"
     },
-    "common/power.hpp": {
+    "internal/power.hpp": {
         "code": "#pragma once\n#include \"type.hpp\"\ntemplate<typename T, typename I>\nconstexpr T powerMonoid(T v, I n, const T& e)\n{\n    assert(n >= 0);\n    if (n == 0) { return e; }\n    return (n % 2 == 1 ? v * powerMonoid(v, n - 1, e) : powerMonoid(v * v, n / 2, e));\n}\ntemplate<typename T, typename I>\nconstexpr T powerInt(T v, I n)\n{\n    return powerMonoid(v, n, T{1});\n}\n",
         "result": "ALL_AC"
     },
-    "common/print/int128_t.hpp": {
+    "internal/print/int128_t.hpp": {
         "code": "#pragma once\n#include \"../type.hpp\"\ninline Ostream& operator<<(Ostream& os, i128 v)\n{\n    bool minus = false;\n    if (v < 0) { minus = true, v = -v; }\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) { ans.push_back('0' + v % 10), v /= 10; }\n    std::reverse(ans.begin(), ans.end());\n    return os << (minus ? \"-\" : \"\") << ans;\n}\ninline Ostream& operator<<(Ostream& os, u128 v)\n{\n    Str ans;\n    if (v == 0) { ans = \"0\"; }\n    while (v) { ans.push_back('0' + v % 10), v /= 10; }\n    std::reverse(ans.begin(), ans.end());\n    return os << ans;\n}\n",
         "result": "ALL_AC"
     },
-    "common/print/print_stl.hpp": {
+    "internal/print/print_stl.hpp": {
         "code": "#pragma once\n#include \"prototype/array.hpp\"\n#include \"prototype/deque.hpp\"\n#include \"prototype/map.hpp\"\n#include \"prototype/multimap.hpp\"\n#include \"prototype/multiset.hpp\"\n#include \"prototype/pair.hpp\"\n#include \"prototype/priority_queue.hpp\"\n#include \"prototype/queue.hpp\"\n#include \"prototype/set.hpp\"\n#include \"prototype/stack.hpp\"\n#include \"prototype/tuple.hpp\"\n#include \"prototype/unordered_map.hpp\"\n#include \"prototype/unordered_multimap.hpp\"\n#include \"prototype/unordered_multiset.hpp\"\n#include \"prototype/unordered_set.hpp\"\n#include \"prototype/vector.hpp\"\n#include \"impl/array.hpp\"\n#include \"impl/deque.hpp\"\n#include \"impl/map.hpp\"\n#include \"impl/multimap.hpp\"\n#include \"impl/multiset.hpp\"\n#include \"impl/pair.hpp\"\n#include \"impl/priority_queue.hpp\"\n#include \"impl/queue.hpp\"\n#include \"impl/set.hpp\"\n#include \"impl/stack.hpp\"\n#include \"impl/tuple.hpp\"\n#include \"impl/unordered_map.hpp\"\n#include \"impl/unordered_multimap.hpp\"\n#include \"impl/unordered_multiset.hpp\"\n#include \"impl/unordered_set.hpp\"\n#include \"impl/vector.hpp\"\n",
         "result": "NOT_TESTED"
     },
-    "common/show.hpp": {
+    "internal/show.hpp": {
         "code": "#pragma once\n#include \"print/int128_t.hpp\"\n#ifdef HOGEPACHI\n#    include \"print/print_stl.hpp\"\nnamespace show_impl {\ntemplate<typename T>\nvoid dump(T x)\n{\n    std::cerr << x;\n}\ntemplate<typename T, typename... Args>\nvoid dump(T x, Args... args)\n{\n    std::cerr << x << \",\", dump(args...);\n}\n}  // namespace show_impl\n#    define SHOW(...)                                  \\\n        (std::cerr << \"LINE \" << __LINE__ << \": \"      \\\n                   << \"(\" << #__VA_ARGS__ << \") = (\"), \\\n            show_impl::dump(__VA_ARGS__), std::cerr << \")\" << std::endl\n#else\n#    define SHOW(...) void(0)\n#endif\n",
         "result": "ALL_AC"
     },
-    "common/type.hpp": {
+    "internal/type.hpp": {
         "code": "#pragma once\n#include <bits/stdc++.h>\nusing i32 = int;\nusing u32 = unsigned int;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\nusing f64 = double;\nusing f80 = long double;\nusing f128 = __float128;\nconstexpr i32 operator\"\" _i32(u64 v) { return v; }\nconstexpr u32 operator\"\" _u32(u64 v) { return v; }\nconstexpr i64 operator\"\" _i64(u64 v) { return v; }\nconstexpr u64 operator\"\" _u64(u64 v) { return v; }\nconstexpr f64 operator\"\" _f64(f80 v) { return v; }\nconstexpr f80 operator\"\" _f80(f80 v) { return v; }\nusing Istream = std::istream;\nusing Ostream = std::ostream;\nusing Str = std::string;\ntemplate<typename T>\nusing Lt = std::less<T>;\ntemplate<typename T>\nusing Gt = std::greater<T>;\ntemplate<int n>\nusing BSet = std::bitset<n>;\ntemplate<typename T1, typename T2>\nusing Pair = std::pair<T1, T2>;\ntemplate<typename... Ts>\nusing Tup = std::tuple<Ts...>;\ntemplate<typename T, int N>\nusing Arr = std::array<T, N>;\ntemplate<typename... Ts>\nusing Deq = std::deque<Ts...>;\ntemplate<typename... Ts>\nusing Set = std::set<Ts...>;\ntemplate<typename... Ts>\nusing MSet = std::multiset<Ts...>;\ntemplate<typename... Ts>\nusing USet = std::unordered_set<Ts...>;\ntemplate<typename... Ts>\nusing UMSet = std::unordered_multiset<Ts...>;\ntemplate<typename... Ts>\nusing Map = std::map<Ts...>;\ntemplate<typename... Ts>\nusing MMap = std::multimap<Ts...>;\ntemplate<typename... Ts>\nusing UMap = std::unordered_map<Ts...>;\ntemplate<typename... Ts>\nusing UMMap = std::unordered_multimap<Ts...>;\ntemplate<typename... Ts>\nusing Vec = std::vector<Ts...>;\ntemplate<typename... Ts>\nusing Stack = std::stack<Ts...>;\ntemplate<typename... Ts>\nusing Queue = std::queue<Ts...>;\ntemplate<typename T>\nusing MaxHeap = std::priority_queue<T>;\ntemplate<typename T>\nusing MinHeap = std::priority_queue<T, Vec<T>, Gt<T>>;\n",
         "result": "ALL_AC"
     },
