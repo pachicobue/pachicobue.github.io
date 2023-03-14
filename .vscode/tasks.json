@@ -39,6 +39,15 @@
                 "script/new.py",
                 "blog"
             ]
+        },
+        {
+            "label": "Hugo Server(Debug)",
+            "detail": "hugo serve -D を実行",
+            "command": "hugo",
+            "args": [
+                "serve",
+                "-D"
+            ]
         }
     ]
 }
