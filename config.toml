@@ -1,4 +1,4 @@
-baseURL = 'https://pachicobue.github.io'
+baseURL = 'https://pachicobue.github.io/'
 title = 'bue.js'
 author = 'pachicobue'
 theme = 'hugo-PaperMod'
